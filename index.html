@@ -436,20 +436,17 @@ button{
 .producto-visual{
     width:100%;
     height:155px;
-
-    margin-bottom:13px;
-
+    margin-bottom:12px;
     overflow:hidden;
-
     border:1px solid rgba(255,255,255,.08);
     border-radius:15px;
-
     background:rgba(0,0,0,.16);
 }
 
 .producto-imagen{
     display:block;
     object-fit:cover;
+    object-position:center;
 }
 
 .producto-visual{
@@ -458,53 +455,59 @@ button{
     font-size:4rem;
 }
 
+.producto-info{
+    min-width:0;
+    flex:1;
+    display:flex;
+    flex-direction:column;
+}
+
 .producto h4{
-    margin-bottom:7px;
-
+    margin:0 0 6px;
     font-size:1rem;
-
+    line-height:1.15;
     text-shadow:0 2px 5px #000;
 }
 
 .producto-descripcion{
-    margin-bottom:14px;
-
+    margin:0;
+    padding-left:18px;
     font-size:.72rem;
-
-    line-height:1.5;
-
+    line-height:1.35;
     text-shadow:0 1px 4px #000;
 }
 
-.precio{
+.producto-descripcion li{
+    margin:0 0 3px;
+}
+
+.producto-pie{
     margin-top:auto;
-    margin-bottom:12px;
+    padding-top:8px;
+    display:flex;
+    flex-direction:column;
+    align-items:flex-end;
+    gap:7px;
+}
 
+.precio{
+    align-self:flex-start;
+    margin:0;
     color:var(--naranja-claro);
-
-    font-size:1.2rem;
+    font-size:1.1rem;
+    line-height:1.05;
 }
 
 .control-cantidad,
 .control-promo{
     display:grid;
-
-    grid-template-columns:
-        42px
-        1fr
-        42px;
-
+    grid-template-columns:42px 1fr 42px;
     align-items:center;
-
     gap:7px;
-
     padding:5px;
-
     border:1px solid rgba(255,255,255,.17);
     border-radius:999px;
-
     background:rgba(0,0,0,.18);
-
     backdrop-filter:blur(8px);
 }
 
@@ -517,20 +520,10 @@ button{
 .promo-cantidad-btn{
     width:42px;
     height:42px;
-
     border:0;
-
     border-radius:50%;
-
-    background:
-        linear-gradient(
-            145deg,
-            #ff7b2e,
-            #ed4b00
-        );
-
+    background:linear-gradient(145deg,#ff7b2e,#ed4b00);
     color:#fff;
-
     font-size:1.3rem;
 }
 
@@ -1202,67 +1195,88 @@ textarea{
     }
 
     .productos{
-        grid-template-columns:1fr;
+        display:flex;
+        flex-direction:column;
+        width:100%;
+        gap:12px;
+        overflow:visible;
+        padding:0;
     }
 
     .producto{
+        width:100%;
+        min-width:0;
         display:grid;
-
-        grid-template-columns:
-            95px
-            minmax(0,1fr);
-
+        grid-template-columns:minmax(132px,44%) minmax(0,1fr);
         column-gap:12px;
-
-        align-items:start;
+        align-items:stretch;
+        padding:11px;
     }
 
     .producto-imagen,
     .producto-visual{
-        grid-row:
-            1
-            /
-            span 4;
-
-        width:95px;
-        height:95px;
-
+        grid-column:1;
+        width:100%;
+        height:168px;
         margin:0;
+        align-self:stretch;
+        border-radius:14px;
     }
 
-    .producto h4,
-    .producto-descripcion,
-    .precio,
-    .control-cantidad{
+    .producto-info{
         grid-column:2;
+        min-width:0;
+        min-height:168px;
+        display:flex;
+        flex-direction:column;
     }
 
     .producto h4{
-        font-size:.84rem;
+        margin:0 0 4px;
+        font-size:.90rem;
+        line-height:1.08;
     }
 
     .producto-descripcion{
-        margin-bottom:6px;
+        margin:0;
+        padding-left:15px;
+        font-size:.62rem;
+        line-height:1.18;
+    }
 
-        font-size:.64rem;
+    .producto-descripcion li{
+        margin:0 0 2px;
+    }
+
+    .producto-pie{
+        margin-top:auto;
+        padding-top:5px;
+        width:100%;
+        display:flex;
+        flex-direction:column;
+        align-items:flex-end;
+        gap:5px;
     }
 
     .precio{
-        margin:0 0 7px;
-
-        font-size:1rem;
+        align-self:flex-start;
+        margin:0;
+        font-size:.96rem;
+        line-height:1;
     }
 
     .control-cantidad{
-        grid-template-columns:
-            37px
-            1fr
-            37px;
+        width:124px;
+        grid-template-columns:34px 1fr 34px;
+        gap:4px;
+        margin:0;
+        padding:4px 5px;
     }
 
     .cantidad-btn{
-        width:37px;
-        height:37px;
+        width:34px;
+        height:34px;
+        font-size:1rem;
     }
 
     .panel{
@@ -1425,10 +1439,6 @@ textarea{
                     Hamburguesas
                 </h3>
 
-                <span data-conteo="hamburguesas">
-                    4 opciones
-                </span>
-
             </div>
 
             <div
@@ -1450,10 +1460,6 @@ textarea{
                 <h3>
                     Hot Dogs
                 </h3>
-
-                <span data-conteo="hotdogs">
-                    4 opciones
-                </span>
 
             </div>
 
@@ -1477,10 +1483,6 @@ textarea{
                     Papas
                 </h3>
 
-                <span data-conteo="papas">
-                    4 opciones
-                </span>
-
             </div>
 
             <div
@@ -1503,10 +1505,6 @@ textarea{
                     Boneless
                 </h3>
 
-                <span data-conteo="boneless">
-                    4 opciones
-                </span>
-
             </div>
 
             <div
@@ -1528,10 +1526,6 @@ textarea{
                 <h3>
                     Bebidas
                 </h3>
-
-                <span data-conteo="bebidas">
-                    4 opciones
-                </span>
 
             </div>
 
@@ -2407,6 +2401,61 @@ function resolverImagen(nombre) {
             }
 
 
+            const valor =
+                String(nombre).trim();
+
+
+            function guardarYResolver(ruta) {
+
+                IMAGENES[nombre] =
+                    ruta;
+
+                resolve(ruta);
+
+            }
+
+
+            if (
+                valor.startsWith("/imagenes/")
+                ||
+                valor.startsWith("imagenes/")
+                ||
+                valor.startsWith("http://")
+                ||
+                valor.startsWith("https://")
+            ) {
+
+                const imagen =
+                    new Image();
+
+
+                imagen.onload =
+                    function() {
+
+                        guardarYResolver(
+                            valor
+                        );
+
+                    };
+
+
+                imagen.onerror =
+                    function() {
+
+                        resolve(null);
+
+                    };
+
+
+                imagen.src =
+                    valor;
+
+
+                return;
+
+            }
+
+
             let indice = 0;
 
 
@@ -2431,7 +2480,7 @@ function resolverImagen(nombre) {
 
                     +
 
-                    nombre
+                    valor
 
                     +
 
@@ -2439,9 +2488,7 @@ function resolverImagen(nombre) {
 
                     +
 
-                    EXTENSIONES[
-                        indice
-                    ];
+                    EXTENSIONES[indice];
 
 
                 indice++;
@@ -2454,12 +2501,7 @@ function resolverImagen(nombre) {
                 imagen.onload =
                     function() {
 
-                        IMAGENES[
-                            nombre
-                        ] =
-                            ruta;
-
-                        resolve(
+                        guardarYResolver(
                             ruta
                         );
 
@@ -2467,7 +2509,11 @@ function resolverImagen(nombre) {
 
 
                 imagen.onerror =
-                    probar;
+                    function() {
+
+                        probar();
+
+                    };
 
 
                 imagen.src =
@@ -2483,214 +2529,77 @@ function resolverImagen(nombre) {
     );
 
 }
-
-
-/* =========================================================
-   CARGAR FONDOS
-========================================================= */
+function productoActivo(producto) {
+  return producto && producto.disponible === true;
+}
 
 async function cargarFondos() {
+  const [
+    logo,
+    fondoInicio,
+    fondoPedido,
+    fondoPago,
+    promo
+  ] = await Promise.all([
+    resolverImagen("fondo dengo mexa"),
+    resolverImagen("fondo mexa inicio"),
+    resolverImagen("fondo-pedido"),
+    resolverImagen("fondo pantalla pago"),
+    resolverImagen(PROMO_MEXA.imagenBase || "promomexa")
+  ]);
 
-    const resultados =
-        await Promise.all([
+  const logoEl = document.querySelector("#logo-mexa");
 
-            resolverImagen(
-                "fondo dengo mexa"
-            ),
+  if (logo) {
+    logoEl.src = logo;
+    logoEl.hidden = false;
+  } else {
+    document.querySelector("#logo-respaldo").hidden = false;
+  }
 
-            resolverImagen(
-                "fondo mexa inicio"
-            ),
+  if (fondoInicio) {
+    document.querySelector(".portada").style.backgroundImage =
+      `url("${fondoInicio}")`;
+  }
 
-            resolverImagen(
-                "fondo-pedido"
-            ),
+  if (fondoPedido) {
+    document.querySelector(".menu-seccion").style.backgroundImage =
+      `url("${fondoPedido}")`;
 
-            resolverImagen(
-                "fondo pantalla pago"
-            ),
+    const bg =
+      `linear-gradient(rgba(0,0,0,.08),rgba(0,0,0,.24)),url("${fondoPedido}")`;
 
-            resolverImagen(
-                PROMO_MEXA.imagenBase
-                ||
-                "promomexa"
-            )
+    document.querySelector("#panel-pedido").style.backgroundImage = bg;
+    document.querySelector("#panel-promo").style.backgroundImage = bg;
+  }
 
-        ]);
+  if (fondoPago) {
+    document.querySelector(".pago-seccion").style.backgroundImage =
+      `url("${fondoPago}")`;
+  }
 
+  const promoEl = document.querySelector("#imagen-promo");
 
-    const logo =
-        resultados[0];
-
-    const fondoInicio =
-        resultados[1];
-
-    const fondoPedido =
-        resultados[2];
-
-    const fondoPago =
-        resultados[3];
-
-    const promo =
-        resultados[4];
-
-
-    if (logo) {
-
-        const logoElemento =
-            document.querySelector(
-                "#logo-mexa"
-            );
-
-
-        logoElemento.src =
-            logo;
-
-
-        logoElemento.hidden =
-            false;
-
-    }
-    else {
-
-        document.querySelector(
-            "#logo-respaldo"
-        ).hidden =
-            false;
-
-    }
-
-
-    if (fondoInicio) {
-
-        document.querySelector(
-            ".portada"
-        ).style.backgroundImage =
-            `url("${fondoInicio}")`;
-
-    }
-
-
-    if (fondoPedido) {
-
-        document.querySelector(
-            ".menu-seccion"
-        ).style.backgroundImage =
-            `url("${fondoPedido}")`;
-
-
-        const fondoPanel =
-
-            `linear-gradient(
-                rgba(0,0,0,.08),
-                rgba(0,0,0,.24)
-            ),
-            url("${fondoPedido}")`;
-
-
-        document.querySelector(
-            "#panel-pedido"
-        ).style.backgroundImage =
-            fondoPanel;
-
-
-        document.querySelector(
-            "#panel-promo"
-        ).style.backgroundImage =
-            fondoPanel;
-
-    }
-
-
-    if (fondoPago) {
-
-        document.querySelector(
-            ".pago-seccion"
-        ).style.backgroundImage =
-            `url("${fondoPago}")`;
-
-    }
-
-
-    if (promo) {
-
-        const imagenPromo =
-            document.querySelector(
-                "#imagen-promo"
-            );
-
-
-        imagenPromo.src =
-            promo;
-
-
-        imagenPromo.hidden =
-            false;
-
-    }
-    else {
-
-        document.querySelector(
-            "#promo-respaldo"
-        ).hidden =
-            false;
-
-    }
-
+  if (promo) {
+    promoEl.src = promo;
+    promoEl.hidden = false;
+  } else {
+    document.querySelector("#promo-respaldo").hidden = false;
+  }
 }
-
-
-/* =========================================================
-   CARGAR IMÁGENES PRODUCTOS
-========================================================= */
-
 async function cargarImagenesProductos() {
+  const nombres = [
+    ...new Set(
+      PRODUCTOS
+        .map(p => p.imagenBase)
+        .filter(Boolean)
+    )
+  ];
 
-    const nombres = [
-
-        ...new Set(
-
-            PRODUCTOS
-
-                .map(
-
-                    function(producto) {
-
-                        return producto.imagenBase;
-
-                    }
-
-                )
-
-                .filter(Boolean)
-
-        )
-
-    ];
-
-
-    await Promise.all(
-
-        nombres.map(
-
-            function(nombre) {
-
-                return resolverImagen(
-                    nombre
-                );
-
-            }
-
-        )
-
-    );
-
+  await Promise.all(
+    nombres.map(resolverImagen)
+  );
 }
-
-
-/* =========================================================
-   DINERO
-========================================================= */
 
 function dinero(valor) {
 
@@ -2698,30 +2607,45 @@ function dinero(valor) {
         "$"
         +
         Number(valor)
-        .toFixed(2)
+            .toFixed(2)
     );
 
 }
 
 
 /* =========================================================
-   PRODUCTO ACTIVO
+   DESCRIPCIÓN EN LISTA
 ========================================================= */
 
-function productoActivo(producto) {
+function descripcionEnLista(descripcion) {
+
+    if (!descripcion) {
+        return "";
+    }
+
+    const ingredientes = String(descripcion)
+        .replace(/\.$/, "")
+        .split(/\s*,\s*|\s+y\s+/i)
+        .map(function(item) {
+            return item.trim();
+        })
+        .filter(Boolean);
+
+    if (ingredientes.length === 0) {
+        return "";
+    }
 
     return (
-
-        producto
-
-        &&
-
-        producto.disponible
-        ===
-        true
-
+        "<ul class=\"producto-descripcion\">"
+        +
+        ingredientes
+            .map(function(ingrediente) {
+                return "<li>" + ingrediente + "</li>";
+            })
+            .join("")
+        +
+        "</ul>"
     );
-
 }
 
 
@@ -2808,62 +2732,68 @@ function crearTarjeta(producto) {
             }
 
 
-            <h4>
-                ${producto.nombre}
-            </h4>
+            <div class="producto-info">
+
+                <h4>
+                    ${producto.nombre}
+                </h4>
 
 
-            <p class="producto-descripcion">
-                ${producto.descripcion || ""}
-            </p>
+                ${descripcionEnLista(producto.descripcion)}
 
 
-            <p class="precio">
-                ${precio}
-            </p>
+                <div class="producto-pie">
+
+                    <p class="precio">
+                        ${precio}
+                    </p>
 
 
-            <div class="control-cantidad">
+                    <div class="control-cantidad">
 
-                <button
-                    type="button"
-                    class="cantidad-btn restar"
-                    data-accion="restar"
-                    data-id="${producto.id}"
-                    ${
-                        habilitado
-                        ?
-                        ""
-                        :
-                        "disabled"
-                    }
-                >
-                    −
-                </button>
-
-
-                <span
-                    data-cantidad="${producto.id}"
-                >
-                    0
-                </span>
+                        <button
+                            type="button"
+                            class="cantidad-btn restar"
+                            data-accion="restar"
+                            data-id="${producto.id}"
+                            ${
+                                habilitado
+                                ?
+                                ""
+                                :
+                                "disabled"
+                            }
+                        >
+                            −
+                        </button>
 
 
-                <button
-                    type="button"
-                    class="cantidad-btn"
-                    data-accion="sumar"
-                    data-id="${producto.id}"
-                    ${
-                        habilitado
-                        ?
-                        ""
-                        :
-                        "disabled"
-                    }
-                >
-                    +
-                </button>
+                        <span
+                            data-cantidad="${producto.id}"
+                        >
+                            ${carrito[producto.id] || 0}
+                        </span>
+
+
+                        <button
+                            type="button"
+                            class="cantidad-btn"
+                            data-accion="sumar"
+                            data-id="${producto.id}"
+                            ${
+                                habilitado
+                                ?
+                                ""
+                                :
+                                "disabled"
+                            }
+                        >
+                            +
+                        </button>
+
+                    </div>
+
+                </div>
 
             </div>
 
@@ -2881,17 +2811,11 @@ function crearTarjeta(producto) {
 function renderProductos() {
 
     const categorias = [
-
         "hamburguesas",
-
         "hotdogs",
-
         "papas",
-
         "boneless",
-
         "bebidas"
-
     ];
 
 
@@ -2926,33 +2850,11 @@ function renderProductos() {
             if (contenedor) {
 
                 contenedor.innerHTML =
-
                     productos
-
                         .map(
                             crearTarjeta
                         )
-
                         .join("");
-
-            }
-
-
-            const contador =
-                document.querySelector(
-                    `[data-conteo="${categoria}"]`
-                );
-
-
-            if (contador) {
-
-                contador.textContent =
-
-                    productos.length
-
-                    +
-
-                    " opciones";
 
             }
 
@@ -3203,6 +3105,17 @@ function cambiarCantidad(
             nueva;
 
     }
+
+
+    document
+        .querySelectorAll(
+            `[data-cantidad="${id}"]`
+        )
+        .forEach(
+            function(elemento) {
+                elemento.textContent = nueva;
+            }
+        );
 
 
     actualizarCarrito();
