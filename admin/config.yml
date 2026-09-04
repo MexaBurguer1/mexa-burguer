@@ -1,0 +1,120 @@
+backend:
+  name: git-gateway
+  branch: main
+
+locale: "es"
+
+media_folder: "imagenes"
+public_folder: "/imagenes"
+
+collections:
+
+  - name: "menu"
+    label: "Menú MEXA BURGUER"
+
+    files:
+
+      - name: "menu"
+        label: "Productos y promoción"
+        file: "datos/menu.json"
+        format: "json"
+
+        fields:
+
+          - label: "Productos"
+            name: "productos"
+            widget: "list"
+            summary: "{{fields.nombre}} — ${{fields.precio}}"
+
+            fields:
+
+              - label: "ID interno"
+                name: "id"
+                widget: "string"
+                hint: "No modificar este campo."
+
+              - label: "Categoría"
+                name: "categoria"
+                widget: "select"
+
+                options:
+                  - { label: "Hamburguesas", value: "hamburguesas" }
+                  - { label: "Hot Dogs", value: "hotdogs" }
+                  - { label: "Papas", value: "papas" }
+                  - { label: "Boneless", value: "boneless" }
+                  - { label: "Bebidas", value: "bebidas" }
+
+              - label: "Nombre del producto"
+                name: "nombre"
+                widget: "string"
+
+              - label: "Ingredientes / descripción"
+                name: "descripcion"
+                widget: "text"
+                hint: "Separa cada ingrediente con una coma. Ejemplo: Carne de res, queso, lechuga, jitomate, cebolla"
+
+              - label: "Precio"
+                name: "precio"
+                widget: "number"
+                value_type: "float"
+                required: false
+                hint: "Escribe solamente el número. Ejemplo: 85"
+
+              - label: "Imagen"
+                name: "imagenBase"
+                widget: "image"
+                required: false
+                choose_url: false
+                hint: "Selecciona o carga una imagen del producto."
+
+              - label: "Icono"
+                name: "icono"
+                widget: "string"
+                required: false
+
+              - label: "Disponible"
+                name: "disponible"
+                widget: "boolean"
+                default: true
+
+
+          - label: "Promoción del día"
+            name: "promo"
+            widget: "object"
+
+            fields:
+
+              - label: "ID interno"
+                name: "id"
+                widget: "string"
+                hint: "No modificar este campo."
+
+              - label: "Nombre de la promoción"
+                name: "nombre"
+                widget: "string"
+
+              - label: "Descripción"
+                name: "descripcion"
+                widget: "text"
+
+              - label: "Precio"
+                name: "precio"
+                widget: "number"
+                value_type: "float"
+                required: false
+
+              - label: "Imagen"
+                name: "imagenBase"
+                widget: "image"
+                required: false
+                choose_url: false
+
+              - label: "Disponible"
+                name: "disponible"
+                widget: "boolean"
+                default: true
+
+              - label: "Es promoción"
+                name: "esPromo"
+                widget: "hidden"
+                default: true
