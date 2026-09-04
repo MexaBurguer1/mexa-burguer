@@ -1,0 +1,4947 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080808">
+<title>MEXA BURGUER</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rye&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<style>
+:root{
+    --negro:#080808;
+    --naranja:#ff6414;
+    --naranja-claro:#ff8b32;
+    --verde:#125b58;
+    --blanco:#fff;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    min-width:320px;
+    margin:0;
+    overflow-x:hidden;
+    background:#080808;
+    color:#fff;
+    font-family:"Rye",Georgia,serif;
+}
+
+body.panel-abierto{
+    overflow:hidden;
+}
+
+button,
+input,
+select,
+textarea,
+a{
+    font-family:"Rye",Georgia,serif;
+}
+
+button{
+    cursor:pointer;
+}
+
+[hidden]{
+    display:none!important;
+}
+
+.portada,
+.seccion{
+    position:relative;
+    min-height:100vh;
+    overflow:hidden;
+    background-color:#111;
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+}
+
+.portada{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:40px 20px 90px;
+    text-align:center;
+}
+
+.portada::before,
+.menu-seccion::before,
+.pago-seccion::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    z-index:0;
+    pointer-events:none;
+}
+
+.portada::before{
+    background:
+        linear-gradient(
+            rgba(0,0,0,.10),
+            rgba(0,0,0,.48)
+        );
+}
+
+.menu-seccion::before{
+    background:rgba(0,0,0,.04);
+}
+
+.pago-seccion::before{
+    background:rgba(0,0,0,.12);
+}
+
+.portada-contenido{
+    position:relative;
+    z-index:2;
+    width:min(700px,100%);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+.logo-mexa{
+    display:block;
+    width:min(315px,73vw);
+    max-height:315px;
+    margin:0 auto 18px;
+    object-fit:contain;
+    background:transparent;
+
+    filter:
+        brightness(0)
+        invert(1)
+        contrast(1.2)
+        drop-shadow(
+            0
+            9px
+            18px
+            rgba(0,0,0,.75)
+        );
+
+    -webkit-filter:
+        brightness(0)
+        invert(1)
+        contrast(1.2)
+        drop-shadow(
+            0
+            9px
+            18px
+            rgba(0,0,0,.75)
+        );
+
+    animation:logoFlota 4s ease-in-out infinite;
+}
+
+@keyframes logoFlota{
+
+    0%,
+    100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-8px);
+    }
+
+}
+
+.logo-respaldo{
+    margin-bottom:25px;
+    color:#fff;
+    font-size:clamp(2rem,9vw,4rem);
+}
+
+.sobrelinea{
+    margin-bottom:10px;
+    color:var(--naranja-claro);
+    font-size:.76rem;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    text-shadow:0 2px 7px #000;
+}
+
+.eslogan{
+    max-width:650px;
+    margin-bottom:10px;
+    color:#fff;
+    font-size:clamp(1.1rem,4vw,1.75rem);
+    line-height:1.35;
+    text-shadow:0 3px 9px #000;
+}
+
+.subtexto{
+    margin-bottom:30px;
+    color:#fff;
+    font-size:.85rem;
+    text-shadow:0 2px 7px #000;
+}
+
+.boton-principal{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:16px 30px;
+    border:1px solid rgba(255,255,255,.20);
+    border-radius:999px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ff7829,
+            #ed4c00
+        );
+
+    color:#fff;
+    text-decoration:none;
+
+    box-shadow:
+        inset 0 1px rgba(255,255,255,.30),
+        0 12px 30px rgba(0,0,0,.35);
+}
+
+.contenedor{
+    position:relative;
+    z-index:2;
+    width:min(1180px,calc(100% - 20px));
+    margin:auto;
+    padding:65px 0 115px;
+}
+
+.encabezado{
+    max-width:760px;
+    margin:0 auto 35px;
+    text-align:center;
+    text-shadow:0 3px 8px #000;
+}
+
+.encabezado h2{
+    margin:8px 0;
+    color:#fff;
+    font-size:clamp(2rem,6vw,3.5rem);
+    line-height:1.1;
+}
+
+.encabezado p{
+    color:#fff;
+}
+
+.menu-navegador{
+    overflow:hidden;
+    border:1px solid rgba(255,255,255,.24);
+    border-radius:24px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.065),
+            rgba(255,255,255,.012)
+        );
+
+    backdrop-filter:blur(9px) saturate(145%);
+    -webkit-backdrop-filter:blur(9px) saturate(145%);
+
+    box-shadow:
+        inset 0 1px rgba(255,255,255,.18),
+        0 20px 50px rgba(0,0,0,.25);
+}
+
+.pestanas-wrapper{
+    position:relative;
+}
+
+.pestanas{
+    display:flex;
+    gap:5px;
+    overflow-x:auto;
+    padding:10px 10px 0;
+    scrollbar-width:none;
+}
+
+.pestanas::-webkit-scrollbar{
+    display:none;
+}
+
+.pestana{
+    position:relative;
+    min-width:155px;
+    min-height:55px;
+    flex:1;
+    padding:10px;
+    border:1px solid rgba(255,255,255,.18);
+    border-bottom:0;
+    border-radius:16px 16px 0 0;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.10),
+            rgba(255,255,255,.02)
+        );
+
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+
+    color:#fff;
+    font-size:.76rem;
+    white-space:nowrap;
+    text-shadow:0 2px 5px #000;
+}
+
+.pestana.activa{
+    border-color:var(--naranja-claro);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,112,30,.40),
+            rgba(255,80,10,.10)
+        );
+}
+
+.pestana.activa::before{
+    content:"";
+    position:absolute;
+    top:4px;
+    left:14px;
+    right:14px;
+    height:3px;
+    border-radius:999px;
+    background:var(--naranja-claro);
+    box-shadow:0 0 10px rgba(255,130,30,.9);
+}
+
+.indicador-pestanas{
+    position:absolute;
+    top:50%;
+    right:7px;
+    z-index:20;
+    transform:translateY(-50%);
+
+    padding:5px 8px;
+
+    border:1px solid rgba(255,255,255,.18);
+    border-radius:999px;
+
+    background:rgba(0,0,0,.48);
+
+    backdrop-filter:blur(7px);
+
+    color:rgba(255,255,255,.92);
+    font-size:.52rem;
+    white-space:nowrap;
+
+    pointer-events:none;
+
+    opacity:1;
+
+    transition:opacity .2s;
+}
+
+.indicador-pestanas.oculto{
+    opacity:0;
+}
+
+.categoria{
+    padding:28px;
+
+    background:rgba(255,255,255,.015);
+
+    backdrop-filter:blur(2px);
+}
+
+.titulo-categoria{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    gap:10px;
+
+    margin-bottom:25px;
+
+    padding-left:15px;
+
+    border-left:5px solid var(--naranja);
+
+    text-shadow:0 2px 6px #000;
+}
+
+.titulo-categoria h3{
+    font-size:clamp(1.5rem,4vw,2.3rem);
+}
+
+.titulo-categoria span{
+    font-size:.72rem;
+}
+
+.productos{
+    display:grid;
+
+    grid-template-columns:
+        repeat(
+            4,
+            minmax(0,1fr)
+        );
+
+    gap:18px;
+}
+
+.producto{
+    min-width:0;
+
+    display:flex;
+    flex-direction:column;
+
+    padding:14px;
+
+    border:1px solid rgba(255,255,255,.20);
+    border-radius:20px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.08),
+            rgba(255,255,255,.015)
+        );
+
+    backdrop-filter:
+        blur(8px)
+        saturate(145%);
+
+    box-shadow:
+        inset 0 1px rgba(255,255,255,.17),
+        0 12px 30px rgba(0,0,0,.18);
+}
+
+.producto.no-disponible{
+    opacity:.58;
+}
+
+.producto-imagen,
+.producto-visual{
+    width:100%;
+    height:155px;
+
+    margin-bottom:13px;
+
+    overflow:hidden;
+
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:15px;
+
+    background:rgba(0,0,0,.16);
+}
+
+.producto-imagen{
+    display:block;
+    object-fit:cover;
+}
+
+.producto-visual{
+    display:grid;
+    place-items:center;
+    font-size:4rem;
+}
+
+.producto h4{
+    margin-bottom:7px;
+
+    font-size:1rem;
+
+    text-shadow:0 2px 5px #000;
+}
+
+.producto-descripcion{
+    margin-bottom:14px;
+
+    font-size:.72rem;
+
+    line-height:1.5;
+
+    text-shadow:0 1px 4px #000;
+}
+
+.precio{
+    margin-top:auto;
+    margin-bottom:12px;
+
+    color:var(--naranja-claro);
+
+    font-size:1.2rem;
+}
+
+.control-cantidad,
+.control-promo{
+    display:grid;
+
+    grid-template-columns:
+        42px
+        1fr
+        42px;
+
+    align-items:center;
+
+    gap:7px;
+
+    padding:5px;
+
+    border:1px solid rgba(255,255,255,.17);
+    border-radius:999px;
+
+    background:rgba(0,0,0,.18);
+
+    backdrop-filter:blur(8px);
+}
+
+.control-cantidad span,
+.control-promo span{
+    text-align:center;
+}
+
+.cantidad-btn,
+.promo-cantidad-btn{
+    width:42px;
+    height:42px;
+
+    border:0;
+
+    border-radius:50%;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ff7b2e,
+            #ed4b00
+        );
+
+    color:#fff;
+
+    font-size:1.3rem;
+}
+
+.cantidad-btn.restar,
+.promo-cantidad-btn.restar{
+    background:rgba(255,255,255,.14);
+
+    border:1px solid rgba(255,255,255,.13);
+}
+
+.cantidad-btn:disabled,
+.promo-cantidad-btn:disabled{
+    opacity:.25;
+}
+
+.resumen-grid{
+    display:grid;
+
+    grid-template-columns:
+        .9fr
+        1.1fr;
+
+    gap:24px;
+
+    align-items:start;
+}
+
+.tarjeta{
+    padding:22px;
+
+    border:1px solid rgba(255,255,255,.20);
+
+    border-radius:23px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.08),
+            rgba(255,255,255,.015)
+        );
+
+    backdrop-filter:
+        blur(9px)
+        saturate(150%);
+
+    box-shadow:
+        inset 0 1px rgba(255,255,255,.18),
+        0 15px 40px rgba(0,0,0,.20);
+}
+
+.tarjeta h3{
+    margin-bottom:18px;
+}
+
+.linea-resumen{
+    display:flex;
+
+    justify-content:space-between;
+
+    gap:15px;
+
+    padding:12px 0;
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.15);
+}
+
+.linea-resumen span:last-child{
+    color:var(--naranja-claro);
+}
+
+.carrito-vacio{
+    padding:25px;
+
+    border:
+        1px dashed
+        rgba(255,255,255,.28);
+
+    border-radius:17px;
+
+    background:rgba(255,255,255,.025);
+
+    text-align:center;
+
+    font-size:.75rem;
+}
+
+.total{
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:15px;
+
+    margin-top:18px;
+
+    padding:17px;
+
+    border-radius:17px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ff7628,
+            #ef4d04
+        );
+
+    color:#fff;
+}
+
+.datos{
+    display:grid;
+    gap:10px;
+}
+
+label{
+    font-size:.73rem;
+}
+
+input,
+select,
+textarea{
+    width:100%;
+
+    min-height:50px;
+
+    padding:12px 14px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.18);
+
+    border-radius:14px;
+
+    outline:none;
+
+    background:rgba(255,255,255,.055);
+
+    color:#fff;
+}
+
+select option{
+    background:#171717;
+    color:#fff;
+}
+
+input::placeholder,
+textarea::placeholder{
+    color:rgba(255,255,255,.55);
+}
+
+textarea{
+    min-height:100px;
+    resize:vertical;
+}
+
+#campo-direccion,
+#campo-efectivo,
+#campo-transferencia{
+    display:grid;
+
+    gap:10px;
+
+    padding:14px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.15);
+
+    border-radius:16px;
+
+    background:rgba(255,255,255,.025);
+}
+
+#usar-ubicacion{
+    min-height:48px;
+
+    border:0;
+
+    border-radius:13px;
+
+    background:var(--verde);
+
+    color:#fff;
+}
+
+#estado-ubicacion{
+    min-height:20px;
+
+    font-size:.7rem;
+}
+
+#mapa-entrega{
+    width:100%;
+    height:300px;
+
+    overflow:hidden;
+
+    border-radius:15px;
+}
+
+#finalizar-pedido{
+    min-height:55px;
+
+    margin-top:10px;
+
+    border:0;
+
+    border-radius:999px;
+
+    background:#25d366;
+
+    color:#062812;
+}
+
+#finalizar-pedido:disabled{
+    opacity:.4;
+}
+
+.boton-flotante{
+    position:fixed;
+
+    bottom:17px;
+
+    z-index:900;
+
+    min-height:52px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.20);
+
+    color:#fff;
+
+    backdrop-filter:blur(15px);
+
+    box-shadow:
+        0
+        10px
+        30px
+        rgba(0,0,0,.30);
+}
+
+#abrir-pedido{
+    left:10px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:9px;
+
+    padding:10px 14px;
+
+    border-radius:999px;
+
+    background:rgba(255,95,15,.88);
+}
+
+#contador-carrito{
+    display:grid;
+
+    place-items:center;
+
+    min-width:30px;
+
+    height:30px;
+
+    border-radius:50%;
+
+    background:#fff;
+
+    color:#000;
+}
+
+#abrir-promo{
+    right:10px;
+
+    max-width:150px;
+
+    padding:10px 16px;
+
+    border-radius:999px;
+
+    background:rgba(10,88,82,.88);
+}
+
+#fondo-panel{
+    position:fixed;
+
+    inset:0;
+
+    z-index:950;
+
+    background:rgba(0,0,0,.42);
+
+    backdrop-filter:blur(4px);
+}
+
+.panel{
+    position:fixed;
+
+    top:0;
+    bottom:0;
+
+    z-index:1000;
+
+    width:min(450px,100%);
+
+    padding:12px;
+
+    overflow-y:auto;
+
+    background-color:#122;
+
+    background-size:cover;
+
+    background-position:center;
+
+    background-repeat:no-repeat;
+
+    transition:transform .28s ease;
+}
+
+#panel-pedido{
+    left:0;
+
+    transform:translateX(-105%);
+}
+
+#panel-promo{
+    right:0;
+
+    transform:translateX(105%);
+}
+
+#panel-pedido.abierto,
+#panel-promo.abierto{
+    transform:translateX(0);
+}
+
+.panel-header{
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:flex-start;
+
+    gap:15px;
+
+    margin-bottom:18px;
+
+    padding:17px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.18);
+
+    border-radius:19px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.09),
+            rgba(255,255,255,.02)
+        );
+
+    backdrop-filter:blur(10px);
+}
+
+.cerrar{
+    width:43px;
+    height:43px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.20);
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.10);
+
+    color:#fff;
+
+    font-size:1.5rem;
+}
+
+#lista-carrito{
+    min-height:150px;
+}
+
+.item-carrito{
+    display:grid;
+
+    grid-template-columns:
+        1fr
+        auto;
+
+    gap:12px;
+
+    margin-bottom:12px;
+
+    padding:14px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.19);
+
+    border-radius:17px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.08),
+            rgba(255,255,255,.015)
+        );
+
+    backdrop-filter:blur(9px);
+}
+
+.item-carrito strong{
+    display:block;
+
+    margin-bottom:4px;
+}
+
+.item-carrito small{
+    display:block;
+
+    margin-top:3px;
+
+    font-size:.64rem;
+}
+
+.item-carrito .control-cantidad{
+    grid-template-columns:
+        34px
+        28px
+        34px;
+}
+
+.item-carrito .cantidad-btn{
+    width:34px;
+    height:34px;
+}
+
+#ir-resumen{
+    width:100%;
+
+    min-height:52px;
+
+    margin-top:14px;
+
+    border:0;
+
+    border-radius:999px;
+
+    background:var(--naranja);
+
+    color:#fff;
+}
+
+#ir-resumen:disabled{
+    opacity:.4;
+}
+
+.promo-contenido{
+    min-height:70vh;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:10px 8px 60px;
+
+    text-align:center;
+}
+
+.dia-promo{
+    margin-bottom:15px;
+
+    padding:8px 14px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.18);
+
+    border-radius:999px;
+
+    background:rgba(255,255,255,.06);
+
+    color:var(--naranja-claro);
+
+    font-size:.72rem;
+
+    text-transform:uppercase;
+}
+
+.promo-imagen-contenedor{
+    width:min(280px,75vw);
+
+    aspect-ratio:1/1;
+
+    display:grid;
+
+    place-items:center;
+
+    margin-bottom:20px;
+
+    overflow:hidden;
+
+    border:
+        1px solid
+        rgba(255,255,255,.20);
+
+    border-radius:26px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.09),
+            rgba(255,255,255,.015)
+        );
+}
+
+.promo-imagen{
+    width:100%;
+    height:100%;
+
+    display:block;
+
+    object-fit:cover;
+}
+
+.promo-respaldo{
+    font-size:5rem;
+}
+
+.promo-contenido h3{
+    margin-bottom:10px;
+
+    font-size:1.8rem;
+}
+
+#descripcion-promo{
+    max-width:320px;
+
+    margin-bottom:12px;
+
+    font-size:.72rem;
+
+    line-height:1.6;
+}
+
+.precio-promo{
+    margin-bottom:16px;
+
+    color:var(--naranja-claro);
+}
+
+.control-promo{
+    width:min(220px,100%);
+
+    grid-template-columns:
+        48px
+        1fr
+        48px;
+}
+
+.promo-cantidad-btn{
+    width:48px;
+    height:48px;
+}
+
+#aviso-carrito{
+    position:fixed;
+
+    left:50%;
+
+    bottom:82px;
+
+    z-index:1500;
+
+    max-width:calc(100% - 30px);
+
+    padding:11px 17px;
+
+    border-radius:999px;
+
+    background:rgba(255,255,255,.90);
+
+    color:#000;
+
+    opacity:0;
+
+    pointer-events:none;
+
+    transform:
+        translate(-50%,15px);
+
+    transition:.2s;
+
+    font-size:.65rem;
+}
+
+#aviso-carrito.visible{
+    opacity:1;
+
+    transform:
+        translate(-50%,0);
+}
+
+@media(max-width:950px){
+
+    .productos{
+        grid-template-columns:
+            repeat(
+                2,
+                1fr
+            );
+    }
+
+    .resumen-grid{
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media(max-width:650px){
+
+    .portada{
+        min-height:100svh;
+    }
+
+    .logo-mexa{
+        width:min(245px,68vw);
+    }
+
+    .contenedor{
+        width:calc(100% - 12px);
+
+        padding-top:52px;
+    }
+
+    .encabezado h2{
+        font-size:2rem;
+    }
+
+    .pestana{
+        flex:
+            0
+            0
+            auto;
+
+        min-width:150px;
+
+        font-size:.67rem;
+    }
+
+    .categoria{
+        padding:18px 12px;
+    }
+
+    .productos{
+        grid-template-columns:1fr;
+    }
+
+    .producto{
+        display:grid;
+
+        grid-template-columns:
+            95px
+            minmax(0,1fr);
+
+        column-gap:12px;
+
+        align-items:start;
+    }
+
+    .producto-imagen,
+    .producto-visual{
+        grid-row:
+            1
+            /
+            span 4;
+
+        width:95px;
+        height:95px;
+
+        margin:0;
+    }
+
+    .producto h4,
+    .producto-descripcion,
+    .precio,
+    .control-cantidad{
+        grid-column:2;
+    }
+
+    .producto h4{
+        font-size:.84rem;
+    }
+
+    .producto-descripcion{
+        margin-bottom:6px;
+
+        font-size:.64rem;
+    }
+
+    .precio{
+        margin:0 0 7px;
+
+        font-size:1rem;
+    }
+
+    .control-cantidad{
+        grid-template-columns:
+            37px
+            1fr
+            37px;
+    }
+
+    .cantidad-btn{
+        width:37px;
+        height:37px;
+    }
+
+    .panel{
+        width:100%;
+    }
+
+    #mapa-entrega{
+        height:285px;
+    }
+
+}
+
+@media(min-width:651px){
+
+    .indicador-pestanas{
+        display:none;
+    }
+
+}
+</style>
+</head>
+
+<body>
+
+<header
+    id="inicio"
+    class="portada"
+>
+
+    <div class="portada-contenido">
+
+        <img
+            id="logo-mexa"
+            class="logo-mexa"
+            alt="MEXA BURGUER"
+            hidden
+        >
+
+        <div
+            id="logo-respaldo"
+            class="logo-respaldo"
+            hidden
+        >
+            MEXA BURGUER
+        </div>
+
+        <p class="sobrelinea">
+            SMASH BURGERS
+        </p>
+
+        <p class="eslogan">
+            El arte del Smash con pura carne de verdad.
+        </p>
+
+        <p class="subtexto">
+            100% carne de res • Smash al momento
+        </p>
+
+        <a
+            href="#menu"
+            class="boton-principal"
+        >
+            Ver menú
+        </a>
+
+    </div>
+
+</header>
+
+
+<section
+    id="menu"
+    class="seccion menu-seccion"
+>
+
+<div class="contenedor">
+
+    <div class="encabezado">
+
+        <p class="sobrelinea">
+            NUESTRO MENÚ
+        </p>
+
+        <h2>
+            Elige tu antojo
+        </h2>
+
+    </div>
+
+
+    <div class="menu-navegador">
+
+        <div class="pestanas-wrapper">
+
+            <div
+                class="pestanas"
+                id="pestanas-productos"
+            >
+
+                <button
+                    type="button"
+                    class="pestana activa"
+                    data-categoria="hamburguesas"
+                >
+                    🍔 Hamburguesas
+                </button>
+
+                <button
+                    type="button"
+                    class="pestana"
+                    data-categoria="hotdogs"
+                >
+                    🌭 Hot Dogs
+                </button>
+
+                <button
+                    type="button"
+                    class="pestana"
+                    data-categoria="papas"
+                >
+                    🍟 Papas
+                </button>
+
+                <button
+                    type="button"
+                    class="pestana"
+                    data-categoria="boneless"
+                >
+                    🍗 Boneless
+                </button>
+
+                <button
+                    type="button"
+                    class="pestana"
+                    data-categoria="bebidas"
+                >
+                    🥤 Bebidas
+                </button>
+
+            </div>
+
+            <div
+                id="indicador-pestanas"
+                class="indicador-pestanas"
+            >
+                Más →
+            </div>
+
+        </div>
+
+
+        <section
+            class="categoria"
+            data-panel="hamburguesas"
+        >
+
+            <div class="titulo-categoria">
+
+                <h3>
+                    Hamburguesas
+                </h3>
+
+                <span data-conteo="hamburguesas">
+                    4 opciones
+                </span>
+
+            </div>
+
+            <div
+                id="productos-hamburguesas"
+                class="productos"
+            ></div>
+
+        </section>
+
+
+        <section
+            class="categoria"
+            data-panel="hotdogs"
+            hidden
+        >
+
+            <div class="titulo-categoria">
+
+                <h3>
+                    Hot Dogs
+                </h3>
+
+                <span data-conteo="hotdogs">
+                    4 opciones
+                </span>
+
+            </div>
+
+            <div
+                id="productos-hotdogs"
+                class="productos"
+            ></div>
+
+        </section>
+
+
+        <section
+            class="categoria"
+            data-panel="papas"
+            hidden
+        >
+
+            <div class="titulo-categoria">
+
+                <h3>
+                    Papas
+                </h3>
+
+                <span data-conteo="papas">
+                    4 opciones
+                </span>
+
+            </div>
+
+            <div
+                id="productos-papas"
+                class="productos"
+            ></div>
+
+        </section>
+
+
+        <section
+            class="categoria"
+            data-panel="boneless"
+            hidden
+        >
+
+            <div class="titulo-categoria">
+
+                <h3>
+                    Boneless
+                </h3>
+
+                <span data-conteo="boneless">
+                    4 opciones
+                </span>
+
+            </div>
+
+            <div
+                id="productos-boneless"
+                class="productos"
+            ></div>
+
+        </section>
+
+
+        <section
+            class="categoria"
+            data-panel="bebidas"
+            hidden
+        >
+
+            <div class="titulo-categoria">
+
+                <h3>
+                    Bebidas
+                </h3>
+
+                <span data-conteo="bebidas">
+                    4 opciones
+                </span>
+
+            </div>
+
+            <div
+                id="productos-bebidas"
+                class="productos"
+            ></div>
+
+        </section>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<section
+    id="resumen-pedido"
+    class="seccion pago-seccion"
+>
+
+<div class="contenedor">
+
+    <div class="encabezado">
+
+        <p class="sobrelinea">
+            ÚLTIMO PASO
+        </p>
+
+        <h2>
+            Resumen del pedido
+        </h2>
+
+        <p>
+            Revisa tus productos y agrega tus datos.
+        </p>
+
+    </div>
+
+
+    <div class="resumen-grid">
+
+
+        <div class="tarjeta">
+
+            <h3>
+                Tu selección
+            </h3>
+
+            <div id="lista-resumen"></div>
+
+            <div class="total">
+
+                <span>
+                    Total
+                </span>
+
+                <strong id="total-resumen">
+                    $0.00
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="tarjeta datos">
+
+            <h3>
+                Datos del pedido
+            </h3>
+
+            <label for="nombre">
+                Nombre
+            </label>
+
+            <input
+                id="nombre"
+                type="text"
+                placeholder="Tu nombre"
+            >
+
+
+            <label for="tipo-entrega">
+                Forma de entrega
+            </label>
+
+            <select id="tipo-entrega">
+
+                <option value="Recoger en local">
+                    Recoger en local
+                </option>
+
+                <option value="Entrega a domicilio">
+                    Entrega a domicilio
+                </option>
+
+            </select>
+
+
+            <div
+                id="campo-direccion"
+                hidden
+            >
+
+                <label for="direccion">
+                    Dirección o referencia
+                </label>
+
+                <input
+                    id="direccion"
+                    type="text"
+                    placeholder="Dirección o referencia"
+                >
+
+                <button
+                    id="usar-ubicacion"
+                    type="button"
+                >
+                    Usar mi ubicación 📍
+                </button>
+
+                <p id="estado-ubicacion"></p>
+
+                <div id="mapa-entrega"></div>
+
+            </div>
+
+
+            <label for="metodo-pago">
+                Método de pago
+            </label>
+
+            <select id="metodo-pago">
+
+                <option value="Efectivo">
+                    Efectivo
+                </option>
+
+                <option value="Transferencia">
+                    Transferencia
+                </option>
+
+            </select>
+
+
+            <div id="campo-efectivo">
+
+                <label for="efectivo">
+                    ¿Con cuánto pagas?
+                </label>
+
+                <input
+                    id="efectivo"
+                    type="number"
+                    placeholder="Cantidad en efectivo"
+                >
+
+            </div>
+
+
+            <div
+                id="campo-transferencia"
+                hidden
+            >
+
+                <p>
+                    Banco: BANCO AQUÍ
+                </p>
+
+                <p>
+                    CLABE: CLABE AQUÍ
+                </p>
+
+                <p>
+                    Titular: NOMBRE AQUÍ
+                </p>
+
+            </div>
+
+
+            <label for="observaciones">
+                Observaciones
+            </label>
+
+            <textarea
+                id="observaciones"
+                placeholder="Observaciones del pedido"
+            ></textarea>
+
+
+            <button
+                id="finalizar-pedido"
+                type="button"
+                disabled
+            >
+                Finalizar pedido
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<button
+    id="abrir-pedido"
+    class="boton-flotante"
+    type="button"
+>
+    PEDIDO
+
+    <span id="contador-carrito">
+        0
+    </span>
+</button>
+
+
+<button
+    id="abrir-promo"
+    class="boton-flotante"
+    type="button"
+>
+    PROMO DEL DÍA
+</button>
+
+
+<div
+    id="fondo-panel"
+    hidden
+></div>
+
+
+<aside
+    id="panel-pedido"
+    class="panel"
+>
+
+    <div class="panel-header">
+
+        <div>
+
+            <p class="sobrelinea">
+                MEXA BURGUER
+            </p>
+
+            <h2>
+                Tu pedido
+            </h2>
+
+        </div>
+
+
+        <button
+            id="cerrar-pedido"
+            class="cerrar"
+            type="button"
+        >
+            ×
+        </button>
+
+    </div>
+
+
+    <div id="lista-carrito"></div>
+
+
+    <div class="total">
+
+        <span>
+            Total
+        </span>
+
+        <strong id="total-carrito">
+            $0.00
+        </strong>
+
+    </div>
+
+
+    <button
+        id="ir-resumen"
+        type="button"
+        disabled
+    >
+        Ir al resumen del pedido
+    </button>
+
+</aside>
+
+
+<aside
+    id="panel-promo"
+    class="panel"
+>
+
+    <div class="panel-header">
+
+        <div>
+
+            <p class="sobrelinea">
+                PROMOCIÓN
+            </p>
+
+            <h2>
+                Promo del día
+            </h2>
+
+        </div>
+
+
+        <button
+            id="cerrar-promo"
+            class="cerrar"
+            type="button"
+        >
+            ×
+        </button>
+
+    </div>
+
+
+    <div class="promo-contenido">
+
+        <span
+            id="dia-promo"
+            class="dia-promo"
+        ></span>
+
+
+        <div class="promo-imagen-contenedor">
+
+            <img
+                id="imagen-promo"
+                class="promo-imagen"
+                alt="Promo Mexa"
+                hidden
+            >
+
+            <div
+                id="promo-respaldo"
+                class="promo-respaldo"
+                hidden
+            >
+                🔥
+            </div>
+
+        </div>
+
+
+        <h3 id="nombre-promo">
+            Promo Mexa
+        </h3>
+
+
+        <p id="descripcion-promo">
+            Promoción especial Mexa disponible todos los días.
+        </p>
+
+
+        <p
+            id="precio-promo"
+            class="precio-promo"
+        >
+            Precio por confirmar
+        </p>
+
+
+        <div class="control-promo">
+
+            <button
+                id="restar-promo"
+                type="button"
+                class="promo-cantidad-btn restar"
+            >
+                −
+            </button>
+
+            <span id="cantidad-promo">
+                0
+            </span>
+
+            <button
+                id="sumar-promo"
+                type="button"
+                class="promo-cantidad-btn"
+            >
+                +
+            </button>
+
+        </div>
+
+    </div>
+
+</aside>
+
+
+<div id="aviso-carrito"></div>
+
+
+<script>
+
+/* =========================================================
+   CONFIGURACIÓN
+========================================================= */
+
+const LAT_LOCAL =
+    19.173971;
+
+const LNG_LOCAL =
+    -98.382621;
+
+const RADIO_KM =
+    2;
+
+const WHATSAPP =
+    "522271344370";
+
+
+/* =========================================================
+   IMÁGENES
+========================================================= */
+
+const EXTENSIONES = [
+
+    "jpg",
+    "png",
+    "jpeg",
+    "webp"
+
+];
+
+const IMAGENES = {};
+
+
+/* =========================================================
+   PRODUCTOS DE RESPALDO
+
+   Estos permiten que la página siga funcionando
+   aunque todavía no exista menu.json.
+========================================================= */
+
+const PRODUCTOS_RESPALDO = [
+
+    {
+        id: "clasica",
+        categoria: "hamburguesas",
+        nombre: "Hamburguesa Clásica",
+        descripcion:
+            "Carne de res, queso, lechuga, jitomate y cebolla.",
+        precio: 85,
+        imagenBase: "hamburguesa",
+        icono: "🍔",
+        disponible: true
+    },
+
+    {
+        id: "bbq",
+        categoria: "hamburguesas",
+        nombre: "Hamburguesa BBQ",
+        descripcion:
+            "Carne de res, queso, cebolla y salsa BBQ.",
+        precio: 95,
+        imagenBase: "hamburguesa",
+        icono: "🍔",
+        disponible: true
+    },
+
+    {
+        id: "mexicana",
+        categoria: "hamburguesas",
+        nombre: "Hamburguesa Mexicana",
+        descripcion:
+            "Carne de res, queso, jalapeño, cebolla y aguacate.",
+        precio: 105,
+        imagenBase: "hamburguesa",
+        icono: "🍔",
+        disponible: true
+    },
+
+    {
+        id: "burger4",
+        categoria: "hamburguesas",
+        nombre: "Hamburguesa 4",
+        descripcion:
+            "Producto por definir.",
+        precio: null,
+        imagenBase: "hamburguesa",
+        icono: "🍔",
+        disponible: false
+    },
+
+
+    {
+        id: "hotdog1",
+        categoria: "hotdogs",
+        nombre: "Hot Dog Clásico",
+        descripcion:
+            "Salchicha, jitomate, cebolla, catsup, mostaza y mayonesa.",
+        precio: 60,
+        imagenBase: "hot dog",
+        icono: "🌭",
+        disponible: true
+    },
+
+    {
+        id: "hotdog2",
+        categoria: "hotdogs",
+        nombre: "Hot Dog Mexa",
+        descripcion:
+            "Salchicha, queso, jalapeño, cebolla y aderezo.",
+        precio: 75,
+        imagenBase: "hot dog",
+        icono: "🌭",
+        disponible: true
+    },
+
+    {
+        id: "hotdog3",
+        categoria: "hotdogs",
+        nombre: "Hot Dog 3",
+        descripcion:
+            "Producto por definir.",
+        precio: null,
+        imagenBase: "hot dog",
+        icono: "🌭",
+        disponible: false
+    },
+
+    {
+        id: "hotdog4",
+        categoria: "hotdogs",
+        nombre: "Hot Dog 4",
+        descripcion:
+            "Producto por definir.",
+        precio: null,
+        imagenBase: "hot dog",
+        icono: "🌭",
+        disponible: false
+    },
+
+
+    {
+        id: "papas1",
+        categoria: "papas",
+        nombre: "Papas 1",
+        descripcion:
+            "Sabor por definir.",
+        precio: null,
+        imagenBase: "papas gajo",
+        icono: "🍟",
+        disponible: true
+    },
+
+    {
+        id: "papas2",
+        categoria: "papas",
+        nombre: "Papas 2",
+        descripcion:
+            "Sabor por definir.",
+        precio: null,
+        imagenBase: "papas gajo",
+        icono: "🍟",
+        disponible: true
+    },
+
+    {
+        id: "papas3",
+        categoria: "papas",
+        nombre: "Papas 3",
+        descripcion:
+            "Sabor por definir.",
+        precio: null,
+        imagenBase: "papas gajo",
+        icono: "🍟",
+        disponible: true
+    },
+
+    {
+        id: "papas4",
+        categoria: "papas",
+        nombre: "Papas 4",
+        descripcion:
+            "Sabor por definir.",
+        precio: null,
+        imagenBase: "papas gajo",
+        icono: "🍟",
+        disponible: true
+    },
+
+
+    {
+        id: "boneless1",
+        categoria: "boneless",
+        nombre: "Boneless 1",
+        descripcion:
+            "Sabor por definir.",
+        precio: null,
+        imagenBase: "bonelessmexa",
+        icono: "🍗",
+        disponible: true
+    },
+
+    {
+        id: "boneless2",
+        categoria: "boneless",
+        nombre: "Boneless 2",
+        descripcion:
+            "Sabor por definir.",
+        precio: null,
+        imagenBase: "bonelessmexa",
+        icono: "🍗",
+        disponible: true
+    },
+
+    {
+        id: "boneless3",
+        categoria: "boneless",
+        nombre: "Boneless 3",
+        descripcion:
+            "Sabor por definir.",
+        precio: null,
+        imagenBase: "bonelessmexa",
+        icono: "🍗",
+        disponible: true
+    },
+
+    {
+        id: "boneless4",
+        categoria: "boneless",
+        nombre: "Boneless 4",
+        descripcion:
+            "Sabor por definir.",
+        precio: null,
+        imagenBase: "bonelessmexa",
+        icono: "🍗",
+        disponible: true
+    },
+
+
+    {
+        id: "refresco",
+        categoria: "bebidas",
+        nombre: "Refresco",
+        descripcion:
+            "Refresco frío.",
+        precio: 30,
+        imagenBase: "agua maravuya",
+        icono: "🥤",
+        disponible: true
+    },
+
+    {
+        id: "agua",
+        categoria: "bebidas",
+        nombre: "Agua fresca",
+        descripcion:
+            "Bebida fría.",
+        precio: 20,
+        imagenBase: "agua maravuya",
+        icono: "🥤",
+        disponible: true
+    },
+
+    {
+        id: "bebida3",
+        categoria: "bebidas",
+        nombre: "Bebida 3",
+        descripcion:
+            "Producto por definir.",
+        precio: null,
+        imagenBase: "agua maravuya",
+        icono: "🥤",
+        disponible: false
+    },
+
+    {
+        id: "bebida4",
+        categoria: "bebidas",
+        nombre: "Bebida 4",
+        descripcion:
+            "Producto por definir.",
+        precio: null,
+        imagenBase: "agua maravuya",
+        icono: "🥤",
+        disponible: false
+    }
+
+];
+
+
+/* =========================================================
+   DATOS DEL MENÚ
+========================================================= */
+
+let PRODUCTOS = [
+    ...PRODUCTOS_RESPALDO
+];
+
+
+let PROMO_MEXA = {
+
+    id: "promo-mexa",
+
+    nombre:
+        "Promo Mexa",
+
+    descripcion:
+        "Promoción especial Mexa disponible todos los días.",
+
+    precio:
+        null,
+
+    imagenBase:
+        "promomexa",
+
+    disponible:
+        true,
+
+    esPromo:
+        true
+
+};
+
+
+const CATALOGO = {};
+
+const carrito = {};
+
+
+/* =========================================================
+   CARGAR MENU.JSON
+
+   Si todavía no existe, se usan los productos
+   de respaldo de arriba.
+========================================================= */
+
+async function cargarDatosMenu() {
+
+    try {
+
+        const respuesta =
+            await fetch(
+                "datos/menu.json",
+                {
+                    cache:
+                        "no-store"
+                }
+            );
+
+
+        if (!respuesta.ok) {
+
+            throw new Error(
+                "menu.json todavía no existe"
+            );
+
+        }
+
+
+        const datos =
+            await respuesta.json();
+
+
+        if (
+            datos
+            &&
+            Array.isArray(
+                datos.productos
+            )
+        ) {
+
+            PRODUCTOS =
+                datos.productos;
+
+        }
+
+
+        if (
+            datos
+            &&
+            datos.promo
+        ) {
+
+            PROMO_MEXA = {
+
+                ...PROMO_MEXA,
+
+                ...datos.promo
+
+            };
+
+        }
+
+    }
+    catch(error) {
+
+        console.info(
+            "MEXA: usando productos de respaldo hasta crear datos/menu.json"
+        );
+
+    }
+
+
+    construirCatalogo();
+
+}
+
+
+/* =========================================================
+   CONSTRUIR CATÁLOGO
+========================================================= */
+
+function construirCatalogo() {
+
+    Object
+        .keys(
+            CATALOGO
+        )
+        .forEach(
+
+            function(id) {
+
+                delete CATALOGO[id];
+
+            }
+
+        );
+
+
+    PRODUCTOS.forEach(
+
+        function(producto) {
+
+            CATALOGO[
+                producto.id
+            ] =
+                producto;
+
+        }
+
+    );
+
+
+    CATALOGO[
+        PROMO_MEXA.id
+    ] =
+        PROMO_MEXA;
+
+}
+
+
+/* =========================================================
+   RESOLVER IMAGEN
+========================================================= */
+
+function resolverImagen(nombre) {
+
+    return new Promise(
+
+        function(resolve) {
+
+            if (!nombre) {
+
+                resolve(null);
+
+                return;
+
+            }
+
+
+            let indice = 0;
+
+
+            function probar() {
+
+                if (
+                    indice
+                    >=
+                    EXTENSIONES.length
+                ) {
+
+                    resolve(null);
+
+                    return;
+
+                }
+
+
+                const ruta =
+
+                    "imagenes/"
+
+                    +
+
+                    nombre
+
+                    +
+
+                    "."
+
+                    +
+
+                    EXTENSIONES[
+                        indice
+                    ];
+
+
+                indice++;
+
+
+                const imagen =
+                    new Image();
+
+
+                imagen.onload =
+                    function() {
+
+                        IMAGENES[
+                            nombre
+                        ] =
+                            ruta;
+
+                        resolve(
+                            ruta
+                        );
+
+                    };
+
+
+                imagen.onerror =
+                    probar;
+
+
+                imagen.src =
+                    ruta;
+
+            }
+
+
+            probar();
+
+        }
+
+    );
+
+}
+
+
+/* =========================================================
+   CARGAR FONDOS
+========================================================= */
+
+async function cargarFondos() {
+
+    const resultados =
+        await Promise.all([
+
+            resolverImagen(
+                "fondo dengo mexa"
+            ),
+
+            resolverImagen(
+                "fondo mexa inicio"
+            ),
+
+            resolverImagen(
+                "fondo-pedido"
+            ),
+
+            resolverImagen(
+                "fondo pantalla pago"
+            ),
+
+            resolverImagen(
+                PROMO_MEXA.imagenBase
+                ||
+                "promomexa"
+            )
+
+        ]);
+
+
+    const logo =
+        resultados[0];
+
+    const fondoInicio =
+        resultados[1];
+
+    const fondoPedido =
+        resultados[2];
+
+    const fondoPago =
+        resultados[3];
+
+    const promo =
+        resultados[4];
+
+
+    if (logo) {
+
+        const logoElemento =
+            document.querySelector(
+                "#logo-mexa"
+            );
+
+
+        logoElemento.src =
+            logo;
+
+
+        logoElemento.hidden =
+            false;
+
+    }
+    else {
+
+        document.querySelector(
+            "#logo-respaldo"
+        ).hidden =
+            false;
+
+    }
+
+
+    if (fondoInicio) {
+
+        document.querySelector(
+            ".portada"
+        ).style.backgroundImage =
+            `url("${fondoInicio}")`;
+
+    }
+
+
+    if (fondoPedido) {
+
+        document.querySelector(
+            ".menu-seccion"
+        ).style.backgroundImage =
+            `url("${fondoPedido}")`;
+
+
+        const fondoPanel =
+
+            `linear-gradient(
+                rgba(0,0,0,.08),
+                rgba(0,0,0,.24)
+            ),
+            url("${fondoPedido}")`;
+
+
+        document.querySelector(
+            "#panel-pedido"
+        ).style.backgroundImage =
+            fondoPanel;
+
+
+        document.querySelector(
+            "#panel-promo"
+        ).style.backgroundImage =
+            fondoPanel;
+
+    }
+
+
+    if (fondoPago) {
+
+        document.querySelector(
+            ".pago-seccion"
+        ).style.backgroundImage =
+            `url("${fondoPago}")`;
+
+    }
+
+
+    if (promo) {
+
+        const imagenPromo =
+            document.querySelector(
+                "#imagen-promo"
+            );
+
+
+        imagenPromo.src =
+            promo;
+
+
+        imagenPromo.hidden =
+            false;
+
+    }
+    else {
+
+        document.querySelector(
+            "#promo-respaldo"
+        ).hidden =
+            false;
+
+    }
+
+}
+
+
+/* =========================================================
+   CARGAR IMÁGENES PRODUCTOS
+========================================================= */
+
+async function cargarImagenesProductos() {
+
+    const nombres = [
+
+        ...new Set(
+
+            PRODUCTOS
+
+                .map(
+
+                    function(producto) {
+
+                        return producto.imagenBase;
+
+                    }
+
+                )
+
+                .filter(Boolean)
+
+        )
+
+    ];
+
+
+    await Promise.all(
+
+        nombres.map(
+
+            function(nombre) {
+
+                return resolverImagen(
+                    nombre
+                );
+
+            }
+
+        )
+
+    );
+
+}
+
+
+/* =========================================================
+   DINERO
+========================================================= */
+
+function dinero(valor) {
+
+    return (
+        "$"
+        +
+        Number(valor)
+        .toFixed(2)
+    );
+
+}
+
+
+/* =========================================================
+   PRODUCTO ACTIVO
+========================================================= */
+
+function productoActivo(producto) {
+
+    return (
+
+        producto
+
+        &&
+
+        producto.disponible
+        ===
+        true
+
+    );
+
+}
+
+
+/* =========================================================
+   CREAR TARJETA
+========================================================= */
+
+function crearTarjeta(producto) {
+
+    const imagen =
+        IMAGENES[
+            producto.imagenBase
+        ];
+
+
+    const habilitado =
+        productoActivo(
+            producto
+        );
+
+
+    const precio =
+
+        Number.isFinite(
+            producto.precio
+        )
+
+        &&
+
+        producto.precio
+        >
+        0
+
+        ?
+
+        dinero(
+            producto.precio
+        )
+
+        :
+
+        "Precio por confirmar";
+
+
+    return `
+
+        <article
+            class="
+                producto
+                ${
+                    habilitado
+                    ?
+                    ""
+                    :
+                    "no-disponible"
+                }
+            "
+        >
+
+            ${
+                imagen
+
+                ?
+
+                `
+                <img
+                    class="producto-imagen"
+                    src="${imagen}"
+                    alt="${producto.nombre}"
+                >
+                `
+
+                :
+
+                `
+                <div class="producto-visual">
+                    ${
+                        producto.icono
+                        ||
+                        "🍽️"
+                    }
+                </div>
+                `
+            }
+
+
+            <h4>
+                ${producto.nombre}
+            </h4>
+
+
+            <p class="producto-descripcion">
+                ${producto.descripcion || ""}
+            </p>
+
+
+            <p class="precio">
+                ${precio}
+            </p>
+
+
+            <div class="control-cantidad">
+
+                <button
+                    type="button"
+                    class="cantidad-btn restar"
+                    data-accion="restar"
+                    data-id="${producto.id}"
+                    ${
+                        habilitado
+                        ?
+                        ""
+                        :
+                        "disabled"
+                    }
+                >
+                    −
+                </button>
+
+
+                <span
+                    data-cantidad="${producto.id}"
+                >
+                    0
+                </span>
+
+
+                <button
+                    type="button"
+                    class="cantidad-btn"
+                    data-accion="sumar"
+                    data-id="${producto.id}"
+                    ${
+                        habilitado
+                        ?
+                        ""
+                        :
+                        "disabled"
+                    }
+                >
+                    +
+                </button>
+
+            </div>
+
+        </article>
+
+    `;
+
+}
+
+
+/* =========================================================
+   RENDERIZAR PRODUCTOS
+========================================================= */
+
+function renderProductos() {
+
+    const categorias = [
+
+        "hamburguesas",
+
+        "hotdogs",
+
+        "papas",
+
+        "boneless",
+
+        "bebidas"
+
+    ];
+
+
+    categorias.forEach(
+
+        function(categoria) {
+
+            const productos =
+                PRODUCTOS.filter(
+
+                    function(producto) {
+
+                        return (
+                            producto.categoria
+                            ===
+                            categoria
+                        );
+
+                    }
+
+                );
+
+
+            const contenedor =
+                document.querySelector(
+                    "#productos-"
+                    +
+                    categoria
+                );
+
+
+            if (contenedor) {
+
+                contenedor.innerHTML =
+
+                    productos
+
+                        .map(
+                            crearTarjeta
+                        )
+
+                        .join("");
+
+            }
+
+
+            const contador =
+                document.querySelector(
+                    `[data-conteo="${categoria}"]`
+                );
+
+
+            if (contador) {
+
+                contador.textContent =
+
+                    productos.length
+
+                    +
+
+                    " opciones";
+
+            }
+
+        }
+
+    );
+
+}
+
+
+/* =========================================================
+   MOSTRAR CATEGORÍA
+========================================================= */
+
+function mostrarCategoria(categoria) {
+
+    document
+        .querySelectorAll(
+            "[data-panel]"
+        )
+        .forEach(
+
+            function(panel) {
+
+                panel.hidden =
+
+                    panel.dataset.panel
+                    !==
+                    categoria;
+
+            }
+
+        );
+
+
+    document
+        .querySelectorAll(
+            ".pestana"
+        )
+        .forEach(
+
+            function(boton) {
+
+                boton.classList.toggle(
+
+                    "activa",
+
+                    boton.dataset.categoria
+                    ===
+                    categoria
+
+                );
+
+            }
+
+        );
+
+}
+
+
+/* =========================================================
+   INDICADOR DE PESTAÑAS
+========================================================= */
+
+function actualizarIndicadorPestanas() {
+
+    const pestañas =
+        document.querySelector(
+            "#pestanas-productos"
+        );
+
+
+    const indicador =
+        document.querySelector(
+            "#indicador-pestanas"
+        );
+
+
+    if (
+        !pestañas
+        ||
+        !indicador
+    ) {
+
+        return;
+
+    }
+
+
+    const final =
+
+        pestañas.scrollLeft
+
+        +
+
+        pestañas.clientWidth
+
+        >=
+
+        pestañas.scrollWidth
+        -
+        10;
+
+
+    indicador.classList.toggle(
+        "oculto",
+        final
+    );
+
+}
+
+
+/* =========================================================
+   CARRITO
+========================================================= */
+
+function cantidadTotal() {
+
+    return Object
+        .values(
+            carrito
+        )
+        .reduce(
+
+            function(total,cantidad) {
+
+                return (
+                    total
+                    +
+                    cantidad
+                );
+
+            },
+
+            0
+
+        );
+
+}
+
+
+function obtenerTotal() {
+
+    return Object
+        .entries(
+            carrito
+        )
+        .reduce(
+
+            function(
+                total,
+                entrada
+            ) {
+
+                const id =
+                    entrada[0];
+
+                const cantidad =
+                    entrada[1];
+
+                const producto =
+                    CATALOGO[id];
+
+
+                if (
+                    producto
+                    &&
+                    Number.isFinite(
+                        producto.precio
+                    )
+                ) {
+
+                    return (
+
+                        total
+
+                        +
+
+                        producto.precio
+
+                        *
+
+                        cantidad
+
+                    );
+
+                }
+
+
+                return total;
+
+            },
+
+            0
+
+        );
+
+}
+
+
+function cambiarCantidad(
+    id,
+    cambio
+) {
+
+    const producto =
+        CATALOGO[id];
+
+
+    if (
+        !productoActivo(
+            producto
+        )
+    ) {
+
+        return;
+
+    }
+
+
+    const actual =
+        carrito[id]
+        ||
+        0;
+
+
+    const nueva =
+        Math.max(
+            0,
+            actual
+            +
+            cambio
+        );
+
+
+    if (
+        nueva
+        ===
+        0
+    ) {
+
+        delete carrito[id];
+
+    }
+    else {
+
+        carrito[id] =
+            nueva;
+
+    }
+
+
+    actualizarCarrito();
+
+
+    mostrarAviso(
+
+        cambio
+        >
+        0
+
+        ?
+
+        producto.nombre
+        +
+        " agregado"
+
+        :
+
+        producto.nombre
+        +
+        " actualizado"
+
+    );
+
+}
+
+
+/* =========================================================
+   ITEM CARRITO
+========================================================= */
+
+function crearItemCarrito(id) {
+
+    const producto =
+        CATALOGO[id];
+
+
+    const cantidad =
+        carrito[id];
+
+
+    const subtotal =
+
+        Number.isFinite(
+            producto.precio
+        )
+
+        ?
+
+        dinero(
+            producto.precio
+            *
+            cantidad
+        )
+
+        :
+
+        "Por confirmar";
+
+
+    return `
+
+        <div class="item-carrito">
+
+            <div>
+
+                <strong>
+                    ${producto.nombre}
+                </strong>
+
+                <small>
+
+                    ${cantidad}
+
+                    ×
+
+                    ${
+                        Number.isFinite(
+                            producto.precio
+                        )
+
+                        ?
+
+                        dinero(
+                            producto.precio
+                        )
+
+                        :
+
+                        "Precio por confirmar"
+                    }
+
+                </small>
+
+                <small>
+                    ${subtotal}
+                </small>
+
+            </div>
+
+
+            <div class="control-cantidad">
+
+                <button
+                    type="button"
+                    class="cantidad-btn restar"
+                    data-accion="restar"
+                    data-id="${id}"
+                >
+                    −
+                </button>
+
+                <span>
+                    ${cantidad}
+                </span>
+
+                <button
+                    type="button"
+                    class="cantidad-btn"
+                    data-accion="sumar"
+                    data-id="${id}"
+                >
+                    +
+                </button>
+
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   RESUMEN
+========================================================= */
+
+function crearLineaResumen(id) {
+
+    const producto =
+        CATALOGO[id];
+
+
+    const cantidad =
+        carrito[id];
+
+
+    const precio =
+
+        Number.isFinite(
+            producto.precio
+        )
+
+        ?
+
+        dinero(
+            producto.precio
+            *
+            cantidad
+        )
+
+        :
+
+        "Por confirmar";
+
+
+    return `
+
+        <div class="linea-resumen">
+
+            <span>
+
+                ${cantidad}
+
+                ×
+
+                ${producto.nombre}
+
+            </span>
+
+            <span>
+                ${precio}
+            </span>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   ACTUALIZAR CARRITO
+========================================================= */
+
+function actualizarCarrito() {
+
+    const ids =
+        Object.keys(
+            carrito
+        );
+
+
+    const vacio =
+        ids.length
+        ===
+        0;
+
+
+    document
+        .querySelectorAll(
+            "[data-cantidad]"
+        )
+        .forEach(
+
+            function(elemento) {
+
+                elemento.textContent =
+
+                    carrito[
+                        elemento.dataset.cantidad
+                    ]
+
+                    ||
+
+                    0;
+
+            }
+
+        );
+
+
+    document.querySelector(
+        "#lista-carrito"
+    ).innerHTML =
+
+        vacio
+
+        ?
+
+        `
+        <p class="carrito-vacio">
+            Tu pedido está vacío.
+        </p>
+        `
+
+        :
+
+        ids
+            .map(
+                crearItemCarrito
+            )
+            .join("");
+
+
+    document.querySelector(
+        "#lista-resumen"
+    ).innerHTML =
+
+        vacio
+
+        ?
+
+        `
+        <p class="carrito-vacio">
+            Todavía no has agregado productos.
+        </p>
+        `
+
+        :
+
+        ids
+            .map(
+                crearLineaResumen
+            )
+            .join("");
+
+
+    document.querySelector(
+        "#total-carrito"
+    ).textContent =
+        dinero(
+            obtenerTotal()
+        );
+
+
+    document.querySelector(
+        "#total-resumen"
+    ).textContent =
+        dinero(
+            obtenerTotal()
+        );
+
+
+    document.querySelector(
+        "#contador-carrito"
+    ).textContent =
+        cantidadTotal();
+
+
+    document.querySelector(
+        "#ir-resumen"
+    ).disabled =
+        vacio;
+
+
+    document.querySelector(
+        "#finalizar-pedido"
+    ).disabled =
+        vacio;
+
+
+    document.querySelector(
+        "#cantidad-promo"
+    ).textContent =
+
+        carrito[
+            PROMO_MEXA.id
+        ]
+
+        ||
+
+        0;
+
+}
+
+
+/* =========================================================
+   AVISO
+========================================================= */
+
+let avisoTimer;
+
+
+function mostrarAviso(texto) {
+
+    const aviso =
+        document.querySelector(
+            "#aviso-carrito"
+        );
+
+
+    aviso.textContent =
+        texto;
+
+
+    aviso.classList.add(
+        "visible"
+    );
+
+
+    clearTimeout(
+        avisoTimer
+    );
+
+
+    avisoTimer =
+        setTimeout(
+
+            function() {
+
+                aviso.classList.remove(
+                    "visible"
+                );
+
+            },
+
+            1200
+
+        );
+
+}
+
+
+/* =========================================================
+   PROMO
+========================================================= */
+
+function cargarPromo() {
+
+    const DIAS = [
+
+        "Domingo",
+
+        "Lunes",
+
+        "Martes",
+
+        "Miércoles",
+
+        "Jueves",
+
+        "Viernes",
+
+        "Sábado"
+
+    ];
+
+
+    document.querySelector(
+        "#dia-promo"
+    ).textContent =
+
+        DIAS[
+            new Date().getDay()
+        ];
+
+
+    document.querySelector(
+        "#nombre-promo"
+    ).textContent =
+
+        PROMO_MEXA.nombre
+
+        ||
+
+        "Promo Mexa";
+
+
+    document.querySelector(
+        "#descripcion-promo"
+    ).textContent =
+
+        PROMO_MEXA.descripcion
+
+        ||
+
+        "Promoción especial Mexa.";
+
+
+    document.querySelector(
+        "#precio-promo"
+    ).textContent =
+
+        Number.isFinite(
+            PROMO_MEXA.precio
+        )
+
+        ?
+
+        dinero(
+            PROMO_MEXA.precio
+        )
+
+        :
+
+        "Precio por confirmar";
+
+
+    document.querySelector(
+        "#sumar-promo"
+    ).disabled =
+
+        !productoActivo(
+            PROMO_MEXA
+        );
+
+
+    document.querySelector(
+        "#restar-promo"
+    ).disabled =
+
+        !productoActivo(
+            PROMO_MEXA
+        );
+
+}
+
+
+/* =========================================================
+   PANELES
+========================================================= */
+
+const fondoPanel =
+    document.querySelector(
+        "#fondo-panel"
+    );
+
+
+const panelPedido =
+    document.querySelector(
+        "#panel-pedido"
+    );
+
+
+const panelPromo =
+    document.querySelector(
+        "#panel-promo"
+    );
+
+
+function cerrarPaneles() {
+
+    panelPedido.classList.remove(
+        "abierto"
+    );
+
+
+    panelPromo.classList.remove(
+        "abierto"
+    );
+
+
+    fondoPanel.hidden =
+        true;
+
+
+    document.body.classList.remove(
+        "panel-abierto"
+    );
+
+}
+
+
+function abrirPanel(panel) {
+
+    cerrarPaneles();
+
+
+    panel.classList.add(
+        "abierto"
+    );
+
+
+    fondoPanel.hidden =
+        false;
+
+
+    document.body.classList.add(
+        "panel-abierto"
+    );
+
+}
+
+
+/* =========================================================
+   ENTREGA Y PAGO
+========================================================= */
+
+const tipoEntrega =
+    document.querySelector(
+        "#tipo-entrega"
+    );
+
+
+const campoDireccion =
+    document.querySelector(
+        "#campo-direccion"
+    );
+
+
+const metodoPago =
+    document.querySelector(
+        "#metodo-pago"
+    );
+
+
+function sincronizarEntrega() {
+
+    const domicilio =
+
+        tipoEntrega.value
+
+        ===
+
+        "Entrega a domicilio";
+
+
+    campoDireccion.hidden =
+        !domicilio;
+
+
+    if (domicilio) {
+
+        iniciarMapa();
+
+
+        setTimeout(
+
+            function() {
+
+                if (mapa) {
+
+                    mapa.invalidateSize();
+
+                }
+
+            },
+
+            200
+
+        );
+
+    }
+
+}
+
+
+function sincronizarPago() {
+
+    const efectivo =
+
+        metodoPago.value
+
+        ===
+
+        "Efectivo";
+
+
+    document.querySelector(
+        "#campo-efectivo"
+    ).hidden =
+        !efectivo;
+
+
+    document.querySelector(
+        "#campo-transferencia"
+    ).hidden =
+        efectivo;
+
+}
+
+
+/* =========================================================
+   MAPA
+========================================================= */
+
+let mapa = null;
+
+let marcador = null;
+
+let ubicacion = null;
+
+let ubicacionAceptada = false;
+
+
+function iniciarMapa() {
+
+    if (
+        mapa
+        ||
+        typeof L
+        ===
+        "undefined"
+    ) {
+
+        return;
+
+    }
+
+
+    mapa =
+        L.map(
+            "mapa-entrega"
+        )
+        .setView(
+
+            [
+                LAT_LOCAL,
+                LNG_LOCAL
+            ],
+
+            15
+
+        );
+
+
+    L.tileLayer(
+
+        "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+
+        {
+
+            maxZoom:
+                19,
+
+            attribution:
+                "&copy; OpenStreetMap"
+
+        }
+
+    ).addTo(
+        mapa
+    );
+
+
+    mapa.on(
+
+        "click",
+
+        function(evento) {
+
+            establecerUbicacion(
+
+                evento.latlng.lat,
+
+                evento.latlng.lng
+
+            );
+
+        }
+
+    );
+
+}
+
+
+/* =========================================================
+   DISTANCIA
+========================================================= */
+
+function distanciaKm(
+    lat1,
+    lon1,
+    lat2,
+    lon2
+) {
+
+    const R =
+        6371;
+
+
+    function rad(valor) {
+
+        return (
+
+            valor
+
+            *
+
+            Math.PI
+
+            /
+
+            180
+
+        );
+
+    }
+
+
+    const dLat =
+        rad(
+            lat2
+            -
+            lat1
+        );
+
+
+    const dLon =
+        rad(
+            lon2
+            -
+            lon1
+        );
+
+
+    const a =
+
+        Math.sin(
+            dLat / 2
+        ) ** 2
+
+        +
+
+        Math.cos(
+            rad(lat1)
+        )
+
+        *
+
+        Math.cos(
+            rad(lat2)
+        )
+
+        *
+
+        Math.sin(
+            dLon / 2
+        ) ** 2;
+
+
+    return (
+
+        R
+
+        *
+
+        2
+
+        *
+
+        Math.atan2(
+
+            Math.sqrt(a),
+
+            Math.sqrt(
+                1 - a
+            )
+
+        )
+
+    );
+
+}
+
+
+/* =========================================================
+   UBICACIÓN
+========================================================= */
+
+function establecerUbicacion(
+    lat,
+    lng
+) {
+
+    iniciarMapa();
+
+
+    ubicacion = {
+
+        lat:
+            lat,
+
+        lng:
+            lng
+
+    };
+
+
+    if (!marcador) {
+
+        marcador =
+            L.marker(
+
+                [
+                    lat,
+                    lng
+                ],
+
+                {
+                    draggable:
+                        true
+                }
+
+            )
+            .addTo(
+                mapa
+            );
+
+
+        marcador.on(
+
+            "dragend",
+
+            function() {
+
+                const posicion =
+                    marcador.getLatLng();
+
+
+                establecerUbicacion(
+
+                    posicion.lat,
+
+                    posicion.lng
+
+                );
+
+            }
+
+        );
+
+    }
+    else {
+
+        marcador.setLatLng(
+
+            [
+                lat,
+                lng
+            ]
+
+        );
+
+    }
+
+
+    mapa.setView(
+
+        [
+            lat,
+            lng
+        ],
+
+        17
+
+    );
+
+
+    const distancia =
+        distanciaKm(
+
+            LAT_LOCAL,
+
+            LNG_LOCAL,
+
+            lat,
+
+            lng
+
+        );
+
+
+    ubicacionAceptada =
+
+        distancia
+
+        <=
+
+        RADIO_KM;
+
+
+    const estado =
+        document.querySelector(
+            "#estado-ubicacion"
+        );
+
+
+    estado.textContent =
+
+        ubicacionAceptada
+
+        ?
+
+        "Ubicación aceptada ✅"
+
+        :
+
+        "Fuera de zona de entrega ❌";
+
+
+    estado.style.color =
+
+        ubicacionAceptada
+
+        ?
+
+        "#46d67d"
+
+        :
+
+        "#ff6f6f";
+
+}
+
+
+/* =========================================================
+   FINALIZAR PEDIDO
+========================================================= */
+
+function finalizarPedido() {
+
+    const ids =
+        Object.keys(
+            carrito
+        );
+
+
+    if (
+        ids.length
+        ===
+        0
+    ) {
+
+        return;
+
+    }
+
+
+    const nombre =
+        document.querySelector(
+            "#nombre"
+        )
+        .value
+        .trim();
+
+
+    if (!nombre) {
+
+        alert(
+            "Escribe tu nombre."
+        );
+
+        return;
+
+    }
+
+
+    const entrega =
+        tipoEntrega.value;
+
+
+    if (
+
+        entrega
+        ===
+        "Entrega a domicilio"
+
+        &&
+
+        (
+            !ubicacion
+
+            ||
+
+            !ubicacionAceptada
+        )
+
+    ) {
+
+        alert(
+            "Selecciona una ubicación válida."
+        );
+
+        return;
+
+    }
+
+
+    const metodo =
+        metodoPago.value;
+
+
+    let detallePago =
+
+        "Método de pago: "
+
+        +
+
+        metodo;
+
+
+    if (
+
+        metodo
+        ===
+        "Efectivo"
+
+        &&
+
+        obtenerTotal()
+        >
+        0
+
+    ) {
+
+        const efectivo =
+            Number(
+
+                document.querySelector(
+                    "#efectivo"
+                ).value
+
+            );
+
+
+        if (
+
+            !efectivo
+
+            ||
+
+            efectivo
+            <
+            obtenerTotal()
+
+        ) {
+
+            alert(
+                "Indica con cuánto pagarás."
+            );
+
+            return;
+
+        }
+
+
+        detallePago +=
+
+            "\nPaga con: "
+
+            +
+
+            dinero(
+                efectivo
+            )
+
+            +
+
+            "\nCambio: "
+
+            +
+
+            dinero(
+
+                efectivo
+
+                -
+
+                obtenerTotal()
+
+            );
+
+    }
+
+
+    const productosTexto =
+
+        ids
+            .map(
+
+                function(id) {
+
+                    const producto =
+                        CATALOGO[id];
+
+
+                    const cantidad =
+                        carrito[id];
+
+
+                    if (
+
+                        Number.isFinite(
+                            producto.precio
+                        )
+
+                    ) {
+
+                        return (
+
+                            "• "
+
+                            +
+
+                            cantidad
+
+                            +
+
+                            " x "
+
+                            +
+
+                            producto.nombre
+
+                            +
+
+                            " — "
+
+                            +
+
+                            dinero(
+
+                                producto.precio
+
+                                *
+
+                                cantidad
+
+                            )
+
+                        );
+
+                    }
+
+
+                    return (
+
+                        "• "
+
+                        +
+
+                        cantidad
+
+                        +
+
+                        " x "
+
+                        +
+
+                        producto.nombre
+
+                        +
+
+                        " — Precio por confirmar"
+
+                    );
+
+                }
+
+            )
+
+            .join("\n");
+
+
+    let detalleEntrega =
+
+        "Entrega: "
+
+        +
+
+        entrega;
+
+
+    if (
+
+        entrega
+        ===
+        "Entrega a domicilio"
+
+    ) {
+
+        const referencia =
+            document.querySelector(
+                "#direccion"
+            )
+            .value
+            .trim();
+
+
+        if (referencia) {
+
+            detalleEntrega +=
+
+                "\nReferencia: "
+
+                +
+
+                referencia;
+
+        }
+
+
+        detalleEntrega +=
+
+            "\nUbicación: https://maps.google.com/?q="
+
+            +
+
+            ubicacion.lat
+
+            +
+
+            ","
+
+            +
+
+            ubicacion.lng;
+
+    }
+
+
+    const observaciones =
+        document.querySelector(
+            "#observaciones"
+        )
+        .value
+        .trim();
+
+
+    let mensaje =
+
+        "🍔 *NUEVO PEDIDO - MEXA BURGUER*"
+
+        +
+
+        "\n\nCliente: "
+
+        +
+
+        nombre
+
+        +
+
+        "\n\n*Pedido:*\n"
+
+        +
+
+        productosTexto
+
+        +
+
+        "\n\n*Total productos con precio: "
+
+        +
+
+        dinero(
+            obtenerTotal()
+        )
+
+        +
+
+        "*"
+
+        +
+
+        "\n\n"
+
+        +
+
+        detalleEntrega
+
+        +
+
+        "\n\n"
+
+        +
+
+        detallePago;
+
+
+    if (observaciones) {
+
+        mensaje +=
+
+            "\nObservaciones: "
+
+            +
+
+            observaciones;
+
+    }
+
+
+    const url =
+
+        "https://wa.me/"
+
+        +
+
+        WHATSAPP
+
+        +
+
+        "?text="
+
+        +
+
+        encodeURIComponent(
+            mensaje
+        );
+
+
+    window.open(
+        url,
+        "_blank"
+    );
+
+}
+
+
+/* =========================================================
+   EVENTOS
+========================================================= */
+
+document.addEventListener(
+
+    "click",
+
+    function(evento) {
+
+        const boton =
+            evento.target.closest(
+                "[data-accion]"
+            );
+
+
+        if (!boton) {
+
+            return;
+
+        }
+
+
+        cambiarCantidad(
+
+            boton.dataset.id,
+
+            boton.dataset.accion
+            ===
+            "sumar"
+
+            ?
+
+            1
+
+            :
+
+            -1
+
+        );
+
+    }
+
+);
+
+
+document
+    .querySelectorAll(
+        ".pestana"
+    )
+    .forEach(
+
+        function(boton) {
+
+            boton.addEventListener(
+
+                "click",
+
+                function() {
+
+                    mostrarCategoria(
+                        boton.dataset.categoria
+                    );
+
+                }
+
+            );
+
+        }
+
+    );
+
+
+document.querySelector(
+    "#abrir-pedido"
+).addEventListener(
+
+    "click",
+
+    function() {
+
+        abrirPanel(
+            panelPedido
+        );
+
+    }
+
+);
+
+
+document.querySelector(
+    "#abrir-promo"
+).addEventListener(
+
+    "click",
+
+    function() {
+
+        abrirPanel(
+            panelPromo
+        );
+
+    }
+
+);
+
+
+document.querySelector(
+    "#cerrar-pedido"
+).addEventListener(
+    "click",
+    cerrarPaneles
+);
+
+
+document.querySelector(
+    "#cerrar-promo"
+).addEventListener(
+    "click",
+    cerrarPaneles
+);
+
+
+fondoPanel.addEventListener(
+    "click",
+    cerrarPaneles
+);
+
+
+document.querySelector(
+    "#ir-resumen"
+).addEventListener(
+
+    "click",
+
+    function() {
+
+        cerrarPaneles();
+
+
+        document.querySelector(
+            "#resumen-pedido"
+        ).scrollIntoView({
+
+            behavior:
+                "smooth"
+
+        });
+
+    }
+
+);
+
+
+document.querySelector(
+    "#sumar-promo"
+).addEventListener(
+
+    "click",
+
+    function() {
+
+        cambiarCantidad(
+
+            PROMO_MEXA.id,
+
+            1
+
+        );
+
+    }
+
+);
+
+
+document.querySelector(
+    "#restar-promo"
+).addEventListener(
+
+    "click",
+
+    function() {
+
+        cambiarCantidad(
+
+            PROMO_MEXA.id,
+
+            -1
+
+        );
+
+    }
+
+);
+
+
+tipoEntrega.addEventListener(
+
+    "change",
+
+    sincronizarEntrega
+
+);
+
+
+metodoPago.addEventListener(
+
+    "change",
+
+    sincronizarPago
+
+);
+
+
+document.querySelector(
+    "#finalizar-pedido"
+).addEventListener(
+
+    "click",
+
+    finalizarPedido
+
+);
+
+
+document.querySelector(
+    "#usar-ubicacion"
+).addEventListener(
+
+    "click",
+
+    function() {
+
+        const estado =
+            document.querySelector(
+                "#estado-ubicacion"
+            );
+
+
+        if (
+            !navigator.geolocation
+        ) {
+
+            estado.textContent =
+                "Tu navegador no permite obtener ubicación.";
+
+            return;
+
+        }
+
+
+        estado.textContent =
+            "Buscando ubicación...";
+
+
+        navigator.geolocation
+            .getCurrentPosition(
+
+                function(posicion) {
+
+                    establecerUbicacion(
+
+                        posicion.coords.latitude,
+
+                        posicion.coords.longitude
+
+                    );
+
+                },
+
+                function() {
+
+                    estado.textContent =
+                        "No se pudo obtener tu ubicación. Puedes tocar el mapa.";
+
+                },
+
+                {
+
+                    enableHighAccuracy:
+                        true,
+
+                    timeout:
+                        12000,
+
+                    maximumAge:
+                        0
+
+                }
+
+            );
+
+    }
+
+);
+
+
+/* =========================================================
+   INICIAR
+========================================================= */
+
+async function iniciarPagina() {
+
+    await cargarDatosMenu();
+
+    await cargarFondos();
+
+    await cargarImagenesProductos();
+
+    renderProductos();
+
+
+    mostrarCategoria(
+        "hamburguesas"
+    );
+
+
+    cargarPromo();
+
+
+    sincronizarEntrega();
+
+
+    sincronizarPago();
+
+
+    actualizarCarrito();
+
+
+    const pestañas =
+        document.querySelector(
+            "#pestanas-productos"
+        );
+
+
+    pestañas.addEventListener(
+
+        "scroll",
+
+        actualizarIndicadorPestanas,
+
+        {
+            passive:
+                true
+        }
+
+    );
+
+
+    window.addEventListener(
+
+        "resize",
+
+        actualizarIndicadorPestanas
+
+    );
+
+
+    actualizarIndicadorPestanas();
+
+
+    setTimeout(
+
+        actualizarIndicadorPestanas,
+
+        300
+
+    );
+
+}
+
+
+iniciarPagina();
+
+</script>
+
+</body>
+</html>

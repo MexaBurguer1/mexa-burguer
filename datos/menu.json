@@ -1,0 +1,213 @@
+{
+  "productos": [
+    {
+      "id": "clasica",
+      "categoria": "hamburguesas",
+      "nombre": "Hamburguesa Clásica",
+      "descripcion": "Carne de res, queso, lechuga, jitomate y cebolla.",
+      "precio": 85,
+      "imagenBase": "hamburguesa",
+      "icono": "🍔",
+      "disponible": true
+    },
+    {
+      "id": "bbq",
+      "categoria": "hamburguesas",
+      "nombre": "Hamburguesa BBQ",
+      "descripcion": "Carne de res, queso, cebolla y salsa BBQ.",
+      "precio": 95,
+      "imagenBase": "hamburguesa",
+      "icono": "🍔",
+      "disponible": true
+    },
+    {
+      "id": "mexicana",
+      "categoria": "hamburguesas",
+      "nombre": "Hamburguesa Mexicana",
+      "descripcion": "Carne de res, queso, jalapeño, cebolla y aguacate.",
+      "precio": 105,
+      "imagenBase": "hamburguesa",
+      "icono": "🍔",
+      "disponible": true
+    },
+    {
+      "id": "burger4",
+      "categoria": "hamburguesas",
+      "nombre": "Hamburguesa 4",
+      "descripcion": "Producto por definir.",
+      "precio": null,
+      "imagenBase": "hamburguesa",
+      "icono": "🍔",
+      "disponible": false
+    },
+    {
+      "id": "hotdog1",
+      "categoria": "hotdogs",
+      "nombre": "Hot Dog Clásico",
+      "descripcion": "Salchicha, jitomate, cebolla, catsup, mostaza y mayonesa.",
+      "precio": 60,
+      "imagenBase": "hot dog",
+      "icono": "🌭",
+      "disponible": true
+    },
+    {
+      "id": "hotdog2",
+      "categoria": "hotdogs",
+      "nombre": "Hot Dog Mexa",
+      "descripcion": "Salchicha, queso, jalapeño, cebolla y aderezo.",
+      "precio": 75,
+      "imagenBase": "hot dog",
+      "icono": "🌭",
+      "disponible": true
+    },
+    {
+      "id": "hotdog3",
+      "categoria": "hotdogs",
+      "nombre": "Hot Dog 3",
+      "descripcion": "Producto por definir.",
+      "precio": null,
+      "imagenBase": "hot dog",
+      "icono": "🌭",
+      "disponible": false
+    },
+    {
+      "id": "hotdog4",
+      "categoria": "hotdogs",
+      "nombre": "Hot Dog 4",
+      "descripcion": "Producto por definir.",
+      "precio": null,
+      "imagenBase": "hot dog",
+      "icono": "🌭",
+      "disponible": false
+    },
+    {
+      "id": "papas1",
+      "categoria": "papas",
+      "nombre": "Papas 1",
+      "descripcion": "Sabor por definir.",
+      "precio": null,
+      "imagenBase": "papas gajo",
+      "icono": "🍟",
+      "disponible": true
+    },
+    {
+      "id": "papas2",
+      "categoria": "papas",
+      "nombre": "Papas 2",
+      "descripcion": "Sabor por definir.",
+      "precio": null,
+      "imagenBase": "papas gajo",
+      "icono": "🍟",
+      "disponible": true
+    },
+    {
+      "id": "papas3",
+      "categoria": "papas",
+      "nombre": "Papas 3",
+      "descripcion": "Sabor por definir.",
+      "precio": null,
+      "imagenBase": "papas gajo",
+      "icono": "🍟",
+      "disponible": true
+    },
+    {
+      "id": "papas4",
+      "categoria": "papas",
+      "nombre": "Papas 4",
+      "descripcion": "Sabor por definir.",
+      "precio": null,
+      "imagenBase": "papas gajo",
+      "icono": "🍟",
+      "disponible": true
+    },
+    {
+      "id": "boneless1",
+      "categoria": "boneless",
+      "nombre": "Boneless 1",
+      "descripcion": "Sabor por definir.",
+      "precio": null,
+      "imagenBase": "bonelessmexa",
+      "icono": "🍗",
+      "disponible": true
+    },
+    {
+      "id": "boneless2",
+      "categoria": "boneless",
+      "nombre": "Boneless 2",
+      "descripcion": "Sabor por definir.",
+      "precio": null,
+      "imagenBase": "bonelessmexa",
+      "icono": "🍗",
+      "disponible": true
+    },
+    {
+      "id": "boneless3",
+      "categoria": "boneless",
+      "nombre": "Boneless 3",
+      "descripcion": "Sabor por definir.",
+      "precio": null,
+      "imagenBase": "bonelessmexa",
+      "icono": "🍗",
+      "disponible": true
+    },
+    {
+      "id": "boneless4",
+      "categoria": "boneless",
+      "nombre": "Boneless 4",
+      "descripcion": "Sabor por definir.",
+      "precio": null,
+      "imagenBase": "bonelessmexa",
+      "icono": "🍗",
+      "disponible": true
+    },
+    {
+      "id": "refresco",
+      "categoria": "bebidas",
+      "nombre": "Refresco",
+      "descripcion": "Refresco frío.",
+      "precio": 30,
+      "imagenBase": "agua maravuya",
+      "icono": "🥤",
+      "disponible": true
+    },
+    {
+      "id": "agua",
+      "categoria": "bebidas",
+      "nombre": "Agua fresca",
+      "descripcion": "Bebida fría.",
+      "precio": 20,
+      "imagenBase": "agua maravuya",
+      "icono": "🥤",
+      "disponible": true
+    },
+    {
+      "id": "bebida3",
+      "categoria": "bebidas",
+      "nombre": "Bebida 3",
+      "descripcion": "Producto por definir.",
+      "precio": null,
+      "imagenBase": "agua maravuya",
+      "icono": "🥤",
+      "disponible": false
+    },
+    {
+      "id": "bebida4",
+      "categoria": "bebidas",
+      "nombre": "Bebida 4",
+      "descripcion": "Producto por definir.",
+      "precio": null,
+      "imagenBase": "agua maravuya",
+      "icono": "🥤",
+      "disponible": false
+    }
+  ],
+  "promo": {
+    "id": "promo-mexa",
+    "nombre": "Promo Mexa",
+    "descripcion": "Promoción especial Mexa disponible todos los días.",
+    "precio": null,
+    "imagenBase": "promomexa",
+    "disponible": true,
+    "esPromo": true
+  }
+}
