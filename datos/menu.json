@@ -199,6 +199,13 @@
       "imagenBase": "agua maravuya",
       "icono": "🥤",
       "disponible": false
+    },
+    {
+      "disponible": true,
+      "categoria": "bebidas",
+      "nombre": "prueba, bebida",
+      "descripcion": "limon y hielo",
+      "precio": 40
     }
   ],
   "promo": {
