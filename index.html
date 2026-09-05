@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#080808">
 <title>MEXA BURGUER</title>
+<link rel="icon" href="data:,">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1964,6 +1965,19 @@ const EXTENSIONES = [
 
 const IMAGENES = {};
 
+const RUTAS_IMAGENES = {
+    "fondo dengo mexa": "imagenes/fondo dengo mexa.png",
+    "fondo mexa inicio": "imagenes/fondo mexa inicio.jpg",
+    "fondo-pedido": "imagenes/fondo-pedido.png",
+    "fondo pantalla pago": "imagenes/fondo pantalla pago.png",
+    "hamburguesa": "imagenes/hamburguesa.jpg",
+    "hot dog": "imagenes/hot dog.jpg",
+    "papas gajo": "imagenes/papas gajo.jpg",
+    "bonelessmexa": "imagenes/bonelessmexa.jpeg",
+    "agua maravuya": "imagenes/agua maravuya.jpg",
+    "promomexa": "imagenes/promomexa.jpg"
+};
+
 
 /* =========================================================
    PRODUCTOS DE RESPALDO
@@ -2388,147 +2402,117 @@ function construirCatalogo() {
 
 function resolverImagen(nombre) {
 
-    return new Promise(
+    return new Promise(function(resolve) {
 
-        function(resolve) {
-
-            if (!nombre) {
-
-                resolve(null);
-
-                return;
-
-            }
-
-
-            const valor =
-                String(nombre).trim();
-
-
-            function guardarYResolver(ruta) {
-
-                IMAGENES[nombre] =
-                    ruta;
-
-                resolve(ruta);
-
-            }
-
-
-            if (
-                valor.startsWith("/imagenes/")
-                ||
-                valor.startsWith("imagenes/")
-                ||
-                valor.startsWith("http://")
-                ||
-                valor.startsWith("https://")
-            ) {
-
-                const imagen =
-                    new Image();
-
-
-                imagen.onload =
-                    function() {
-
-                        guardarYResolver(
-                            valor
-                        );
-
-                    };
-
-
-                imagen.onerror =
-                    function() {
-
-                        resolve(null);
-
-                    };
-
-
-                imagen.src =
-                    valor;
-
-
-                return;
-
-            }
-
-
-            let indice = 0;
-
-
-            function probar() {
-
-                if (
-                    indice
-                    >=
-                    EXTENSIONES.length
-                ) {
-
-                    resolve(null);
-
-                    return;
-
-                }
-
-
-                const ruta =
-
-                    "imagenes/"
-
-                    +
-
-                    valor
-
-                    +
-
-                    "."
-
-                    +
-
-                    EXTENSIONES[indice];
-
-
-                indice++;
-
-
-                const imagen =
-                    new Image();
-
-
-                imagen.onload =
-                    function() {
-
-                        guardarYResolver(
-                            ruta
-                        );
-
-                    };
-
-
-                imagen.onerror =
-                    function() {
-
-                        probar();
-
-                    };
-
-
-                imagen.src =
-                    ruta;
-
-            }
-
-
-            probar();
-
+        if (!nombre) {
+            resolve(null);
+            return;
         }
 
-    );
+        const valor = String(nombre).trim();
 
+        function guardarYResolver(ruta) {
+            IMAGENES[nombre] = ruta;
+            resolve(ruta);
+        }
+
+        /*
+           Si Decap CMS ya guardó una ruta completa como
+           /imagenes/producto.jpg o imagenes/producto.jpg,
+           se usa directamente.
+        */
+        if (
+            valor.startsWith("/imagenes/")
+            ||
+            valor.startsWith("imagenes/")
+            ||
+            valor.startsWith("http://")
+            ||
+            valor.startsWith("https://")
+        ) {
+
+            const rutaDirecta =
+                valor.startsWith("/imagenes/")
+                ? valor.slice(1)
+                : valor;
+
+            const imagen = new Image();
+
+            imagen.onload = function() {
+                guardarYResolver(rutaDirecta);
+            };
+
+            imagen.onerror = function() {
+                resolve(null);
+            };
+
+            imagen.src = rutaDirecta;
+            return;
+        }
+
+        /*
+           Para los recursos actuales de MEXA BURGUER usamos
+           su extensión real. Así el navegador no genera 404
+           probando .jpg, .png, .jpeg, etc.
+        */
+        if (RUTAS_IMAGENES[valor]) {
+
+            const rutaConocida = RUTAS_IMAGENES[valor];
+            const imagen = new Image();
+
+            imagen.onload = function() {
+                guardarYResolver(rutaConocida);
+            };
+
+            imagen.onerror = function() {
+                resolve(null);
+            };
+
+            imagen.src = rutaConocida;
+            return;
+        }
+
+        /*
+           Compatibilidad de respaldo para nombres antiguos o
+           recursos nuevos sin extensión.
+        */
+        let indice = 0;
+
+        function probar() {
+
+            if (indice >= EXTENSIONES.length) {
+                resolve(null);
+                return;
+            }
+
+            const ruta =
+                "imagenes/"
+                +
+                valor
+                +
+                "."
+                +
+                EXTENSIONES[indice];
+
+            indice++;
+
+            const imagen = new Image();
+
+            imagen.onload = function() {
+                guardarYResolver(ruta);
+            };
+
+            imagen.onerror = function() {
+                probar();
+            };
+
+            imagen.src = ruta;
+        }
+
+        probar();
+    });
 }
+
 function productoActivo(producto) {
   return producto && producto.disponible === true;
 }
