@@ -4,6 +4,9 @@ backend:
 
 locale: "es"
 
+editor:
+  preview: false
+
 media_folder: "imagenes"
 public_folder: "/imagenes"
 
