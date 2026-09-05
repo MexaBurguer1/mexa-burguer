@@ -5,7 +5,7 @@
       "categoria": "hamburguesas",
       "nombre": "Hamburguesa Clásica",
       "descripcion": "Carne de res, queso, lechuga, jitomate y cebolla.",
-      "precio": 86,
+      "precio": 87,
       "imagenBase": "hamburguesa",
       "icono": "🍔",
       "disponible": true
