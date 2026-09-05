@@ -8,34 +8,29 @@ media_folder: "imagenes"
 public_folder: "/imagenes"
 
 collections:
-
   - name: "menu"
     label: "Menú MEXA BURGUER"
 
     files:
-
       - name: "menu"
         label: "Productos y promoción"
         file: "datos/menu.json"
         format: "json"
 
         fields:
-
           - label: "Productos"
             name: "productos"
             widget: "list"
             summary: "{{fields.nombre}} — ${{fields.precio}}"
 
             fields:
-
               - label: "ID interno"
-  name: "id"
-  widget: "hidden"
+                name: "id"
+                widget: "hidden"
 
               - label: "Categoría"
                 name: "categoria"
                 widget: "select"
-
                 options:
                   - { label: "Hamburguesas", value: "hamburguesas" }
                   - { label: "Hot Dogs", value: "hotdogs" }
@@ -76,16 +71,14 @@ collections:
                 widget: "boolean"
                 default: true
 
-
           - label: "Promoción del día"
             name: "promo"
             widget: "object"
 
             fields:
-
-             - label: "ID interno"
-  name: "id"
-  widget: "hidden"
+              - label: "ID interno"
+                name: "id"
+                widget: "hidden"
 
               - label: "Nombre de la promoción"
                 name: "nombre"
