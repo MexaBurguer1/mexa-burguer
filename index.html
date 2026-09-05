@@ -1695,15 +1695,15 @@ textarea{
             >
 
                 <p>
-                    Banco: BANCO AQUÍ
+                    Banco: <span id="dato-banco">BANCO AQUÍ</span>
                 </p>
 
                 <p>
-                    CLABE: CLABE AQUÍ
+                    CLABE: <span id="dato-clabe">CLABE AQUÍ</span>
                 </p>
 
                 <p>
-                    Titular: NOMBRE AQUÍ
+                    Titular: <span id="dato-titular">NOMBRE AQUÍ</span>
                 </p>
 
             </div>
@@ -2269,6 +2269,13 @@ let PROMO_MEXA = {
 };
 
 
+let PAGO_MEXA = {
+    banco: "BANCO AQUÍ",
+    clabe: "CLABE AQUÍ",
+    titular: "NOMBRE AQUÍ"
+};
+
+
 const CATALOGO = {};
 
 const carrito = {};
@@ -2338,6 +2345,23 @@ async function cargarDatosMenu() {
 
         }
 
+
+        if (
+            datos
+            &&
+            datos.pago
+        ) {
+
+            PAGO_MEXA = {
+
+                ...PAGO_MEXA,
+
+                ...datos.pago
+
+            };
+
+        }
+
     }
     catch(error) {
 
@@ -2349,6 +2373,40 @@ async function cargarDatosMenu() {
 
 
     construirCatalogo();
+
+}
+
+
+/* =========================================================
+   DATOS DE PAGO
+========================================================= */
+
+function actualizarDatosPago() {
+
+    const banco =
+        document.querySelector("#dato-banco");
+
+    const clabe =
+        document.querySelector("#dato-clabe");
+
+    const titular =
+        document.querySelector("#dato-titular");
+
+
+    if (banco) {
+        banco.textContent =
+            PAGO_MEXA.banco || "BANCO AQUÍ";
+    }
+
+    if (clabe) {
+        clabe.textContent =
+            PAGO_MEXA.clabe || "CLABE AQUÍ";
+    }
+
+    if (titular) {
+        titular.textContent =
+            PAGO_MEXA.titular || "NOMBRE AQUÍ";
+    }
 
 }
 
@@ -4802,6 +4860,8 @@ document.querySelector(
 async function iniciarPagina() {
 
     await cargarDatosMenu();
+
+    actualizarDatosPago();
 
     await cargarFondos();
 
