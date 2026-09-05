@@ -48,21 +48,19 @@ collections:
               - label: "Ingredientes / descripción"
                 name: "descripcion"
                 widget: "text"
-                hint: "Separa cada ingrediente con una coma. Ejemplo: Carne de res, queso, lechuga, jitomate, cebolla"
+                hint: "Separa cada ingrediente con una coma."
 
               - label: "Precio"
                 name: "precio"
                 widget: "number"
                 value_type: "float"
                 required: false
-                hint: "Escribe solamente el número. Ejemplo: 85"
 
               - label: "Imagen"
                 name: "imagenBase"
                 widget: "image"
                 required: false
                 choose_url: false
-                hint: "Selecciona o carga una imagen del producto."
 
               - label: "Icono"
                 name: "icono"
@@ -112,3 +110,26 @@ collections:
                 name: "esPromo"
                 widget: "hidden"
                 default: true
+
+          - label: "Datos de pago"
+            name: "pago"
+            widget: "object"
+            required: false
+
+            fields:
+              - label: "Banco"
+                name: "banco"
+                widget: "string"
+                required: false
+                hint: "Ejemplo: BBVA"
+
+              - label: "CLABE"
+                name: "clabe"
+                widget: "string"
+                required: false
+                hint: "Escribe la CLABE tal como debe mostrarse."
+
+              - label: "Titular de la cuenta"
+                name: "titular"
+                widget: "string"
+                required: false
