@@ -29,9 +29,8 @@ collections:
             fields:
 
               - label: "ID interno"
-                name: "id"
-                widget: "string"
-                hint: "No modificar este campo."
+  name: "id"
+  widget: "hidden"
 
               - label: "Categoría"
                 name: "categoria"
@@ -84,10 +83,9 @@ collections:
 
             fields:
 
-              - label: "ID interno"
-                name: "id"
-                widget: "string"
-                hint: "No modificar este campo."
+             - label: "ID interno"
+  name: "id"
+  widget: "hidden"
 
               - label: "Nombre de la promoción"
                 name: "nombre"
