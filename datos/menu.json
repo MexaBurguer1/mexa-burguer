@@ -219,7 +219,7 @@
   },
   "pago": {
     "banco": "BANCO PRUEBA",
-    "clabe": "CLABE: 123456789012345678",
+    "clabe": "123456789012345678",
     "titular": "DAVID PRUEBA"
   }
 }
