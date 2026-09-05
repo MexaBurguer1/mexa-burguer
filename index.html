@@ -2357,6 +2357,37 @@ async function cargarDatosMenu() {
    CONSTRUIR CATÁLOGO
 ========================================================= */
 
+
+function generarIdProducto(producto, indice) {
+    if (producto && producto.id && String(producto.id).trim()) {
+        return String(producto.id).trim();
+    }
+
+    const base = (
+        (producto && producto.categoria ? producto.categoria : "producto")
+        + "-"
+        + (producto && producto.nombre ? producto.nombre : "nuevo")
+    )
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "");
+
+    let id = base || ("producto-" + (indice + 1));
+    let candidato = id;
+    let sufijo = 2;
+
+    while (CATALOGO[candidato]) {
+        candidato = id + "-" + sufijo;
+        sufijo++;
+    }
+
+    producto.id = candidato;
+    return candidato;
+}
+
+
 function construirCatalogo() {
 
     Object
@@ -2376,10 +2407,13 @@ function construirCatalogo() {
 
     PRODUCTOS.forEach(
 
-        function(producto) {
+        function(producto, indice) {
+
+            const idProducto =
+                generarIdProducto(producto, indice);
 
             CATALOGO[
-                producto.id
+                idProducto
             ] =
                 producto;
 
