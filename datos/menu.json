@@ -5,7 +5,7 @@
       "categoria": "hamburguesas",
       "nombre": "Hamburguesa Clásica",
       "descripcion": "Carne de res, queso, lechuga, jitomate y cebolla.",
-      "precio": 87,
+      "precio": 85,
       "imagenBase": "hamburguesa",
       "icono": "🍔",
       "disponible": true
@@ -199,13 +199,6 @@
       "imagenBase": "agua maravuya",
       "icono": "🥤",
       "disponible": false
-    },
-    {
-      "disponible": true,
-      "categoria": "bebidas",
-      "nombre": "prueba, bebida",
-      "descripcion": "limon y hielo",
-      "precio": 40
     }
   ],
   "promo": {
@@ -216,10 +209,5 @@
     "imagenBase": "promomexa",
     "disponible": true,
     "esPromo": true
-  },
-  "pago": {
-    "banco": "BANCO PRUEBA",
-    "clabe": "123456789012345678",
-    "titular": "DAVID PRUEBA"
   }
 }

@@ -1,0 +1,51 @@
+{
+  "domingo": {
+    "nombre": "Promo del domingo",
+    "descripcion": "Promoción especial Mexa del domingo.",
+    "precio": null,
+    "imagenBase": "/imagenes/promomexa.jpg",
+    "disponible": true
+  },
+  "lunes": {
+    "nombre": "Promo del lunes",
+    "descripcion": "Promoción especial Mexa del lunes.",
+    "precio": null,
+    "imagenBase": "/imagenes/promomexa.jpg",
+    "disponible": true
+  },
+  "martes": {
+    "nombre": "Promo del martes",
+    "descripcion": "Promoción especial Mexa del martes.",
+    "precio": null,
+    "imagenBase": "/imagenes/promomexa.jpg",
+    "disponible": true
+  },
+  "miercoles": {
+    "nombre": "Promo del miércoles",
+    "descripcion": "Promoción especial Mexa del miércoles.",
+    "precio": null,
+    "imagenBase": "/imagenes/promomexa.jpg",
+    "disponible": true
+  },
+  "jueves": {
+    "nombre": "Promo del jueves",
+    "descripcion": "Promoción especial Mexa del jueves.",
+    "precio": null,
+    "imagenBase": "/imagenes/promomexa.jpg",
+    "disponible": true
+  },
+  "viernes": {
+    "nombre": "Promo del viernes",
+    "descripcion": "Promoción especial Mexa del viernes.",
+    "precio": null,
+    "imagenBase": "/imagenes/promomexa.jpg",
+    "disponible": true
+  },
+  "sabado": {
+    "nombre": "Promo del sábado",
+    "descripcion": "Promoción especial Mexa del sábado.",
+    "precio": null,
+    "imagenBase": "/imagenes/promomexa.jpg",
+    "disponible": true
+  }
+}

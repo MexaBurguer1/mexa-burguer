@@ -1,0 +1,8 @@
+{
+  "logo": "/imagenes/fondo dengo mexa.png",
+  "fondoInicio": "/imagenes/fondo mexa inicio.jpg",
+  "fondoMenu": "/imagenes/fondo-pedido.png",
+  "fondoPago": "/imagenes/fondo pantalla pago.png",
+  "fondoPanelPedido": "/imagenes/fondo-pedido.png",
+  "fondoPanelPromo": "/imagenes/fondo-pedido.png"
+}
