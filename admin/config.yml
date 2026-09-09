@@ -1,5 +1,6 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: MexaBurguer1/mexa-burguer
   branch: main
 
 locale: "es"
@@ -12,25 +13,22 @@ public_folder: "/imagenes"
 
 collections:
   - name: "menu"
-    label: "Menú MEXA BURGUER"
-
+    label: "Menú y pagos"
     files:
       - name: "menu"
-        label: "Productos y promoción"
+        label: "Productos y datos de pago"
         file: "datos/menu.json"
         format: "json"
-
         fields:
           - label: "Productos"
             name: "productos"
             widget: "list"
             summary: "{{fields.nombre}} — ${{fields.precio}}"
-
             fields:
               - label: "ID interno"
                 name: "id"
                 widget: "hidden"
-
+                required: false
               - label: "Categoría"
                 name: "categoria"
                 widget: "select"
@@ -40,96 +38,158 @@ collections:
                   - { label: "Papas", value: "papas" }
                   - { label: "Boneless", value: "boneless" }
                   - { label: "Bebidas", value: "bebidas" }
-
               - label: "Nombre del producto"
                 name: "nombre"
                 widget: "string"
-
               - label: "Ingredientes / descripción"
                 name: "descripcion"
                 widget: "text"
                 hint: "Separa cada ingrediente con una coma."
-
               - label: "Precio"
                 name: "precio"
                 widget: "number"
                 value_type: "float"
                 required: false
-
               - label: "Imagen"
                 name: "imagenBase"
                 widget: "image"
                 required: false
                 choose_url: false
-
               - label: "Icono"
                 name: "icono"
                 widget: "string"
                 required: false
-
               - label: "Disponible"
                 name: "disponible"
                 widget: "boolean"
-                default: true
-
-          - label: "Promoción del día"
-            name: "promo"
-            widget: "object"
-
-            fields:
-              - label: "ID interno"
-                name: "id"
-                widget: "hidden"
-
-              - label: "Nombre de la promoción"
-                name: "nombre"
-                widget: "string"
-
-              - label: "Descripción"
-                name: "descripcion"
-                widget: "text"
-
-              - label: "Precio"
-                name: "precio"
-                widget: "number"
-                value_type: "float"
-                required: false
-
-              - label: "Imagen"
-                name: "imagenBase"
-                widget: "image"
-                required: false
-                choose_url: false
-
-              - label: "Disponible"
-                name: "disponible"
-                widget: "boolean"
-                default: true
-
-              - label: "Es promoción"
-                name: "esPromo"
-                widget: "hidden"
                 default: true
 
           - label: "Datos de pago"
             name: "pago"
             widget: "object"
             required: false
-
             fields:
               - label: "Banco"
                 name: "banco"
                 widget: "string"
                 required: false
-                hint: "Ejemplo: BBVA"
-
               - label: "CLABE"
                 name: "clabe"
                 widget: "string"
                 required: false
-                hint: "Escribe la CLABE tal como debe mostrarse."
-
               - label: "Titular de la cuenta"
                 name: "titular"
                 widget: "string"
                 required: false
+
+  - name: "apariencia"
+    label: "Fondos e imágenes"
+    files:
+      - name: "apariencia"
+        label: "Apariencia de la página"
+        file: "datos/apariencia.json"
+        format: "json"
+        fields:
+          - label: "Logo de MEXA BURGUER"
+            name: "logo"
+            widget: "image"
+            choose_url: false
+          - label: "Fondo de inicio"
+            name: "fondoInicio"
+            widget: "image"
+            choose_url: false
+          - label: "Fondo del menú"
+            name: "fondoMenu"
+            widget: "image"
+            choose_url: false
+          - label: "Fondo de resumen / pago"
+            name: "fondoPago"
+            widget: "image"
+            choose_url: false
+          - label: "Fondo del panel Pedido"
+            name: "fondoPanelPedido"
+            widget: "image"
+            choose_url: false
+          - label: "Fondo del panel Promo"
+            name: "fondoPanelPromo"
+            widget: "image"
+            choose_url: false
+
+  - name: "promociones"
+    label: "Promociones por día"
+    files:
+      - name: "promociones"
+        label: "Promociones de la semana"
+        file: "datos/promociones.json"
+        format: "json"
+        fields:
+          - label: "Domingo"
+            name: "domingo"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Nombre", name: "nombre", widget: "string" }
+              - { label: "Descripción", name: "descripcion", widget: "text" }
+              - { label: "Precio", name: "precio", widget: "number", value_type: "float", required: false }
+              - { label: "Imagen", name: "imagenBase", widget: "image", choose_url: false, required: false }
+              - { label: "Disponible", name: "disponible", widget: "boolean", default: true }
+          - label: "Lunes"
+            name: "lunes"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Nombre", name: "nombre", widget: "string" }
+              - { label: "Descripción", name: "descripcion", widget: "text" }
+              - { label: "Precio", name: "precio", widget: "number", value_type: "float", required: false }
+              - { label: "Imagen", name: "imagenBase", widget: "image", choose_url: false, required: false }
+              - { label: "Disponible", name: "disponible", widget: "boolean", default: true }
+          - label: "Martes"
+            name: "martes"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Nombre", name: "nombre", widget: "string" }
+              - { label: "Descripción", name: "descripcion", widget: "text" }
+              - { label: "Precio", name: "precio", widget: "number", value_type: "float", required: false }
+              - { label: "Imagen", name: "imagenBase", widget: "image", choose_url: false, required: false }
+              - { label: "Disponible", name: "disponible", widget: "boolean", default: true }
+          - label: "Miércoles"
+            name: "miercoles"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Nombre", name: "nombre", widget: "string" }
+              - { label: "Descripción", name: "descripcion", widget: "text" }
+              - { label: "Precio", name: "precio", widget: "number", value_type: "float", required: false }
+              - { label: "Imagen", name: "imagenBase", widget: "image", choose_url: false, required: false }
+              - { label: "Disponible", name: "disponible", widget: "boolean", default: true }
+          - label: "Jueves"
+            name: "jueves"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Nombre", name: "nombre", widget: "string" }
+              - { label: "Descripción", name: "descripcion", widget: "text" }
+              - { label: "Precio", name: "precio", widget: "number", value_type: "float", required: false }
+              - { label: "Imagen", name: "imagenBase", widget: "image", choose_url: false, required: false }
+              - { label: "Disponible", name: "disponible", widget: "boolean", default: true }
+          - label: "Viernes"
+            name: "viernes"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Nombre", name: "nombre", widget: "string" }
+              - { label: "Descripción", name: "descripcion", widget: "text" }
+              - { label: "Precio", name: "precio", widget: "number", value_type: "float", required: false }
+              - { label: "Imagen", name: "imagenBase", widget: "image", choose_url: false, required: false }
+              - { label: "Disponible", name: "disponible", widget: "boolean", default: true }
+          - label: "Sábado"
+            name: "sabado"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Nombre", name: "nombre", widget: "string" }
+              - { label: "Descripción", name: "descripcion", widget: "text" }
+              - { label: "Precio", name: "precio", widget: "number", value_type: "float", required: false }
+              - { label: "Imagen", name: "imagenBase", widget: "image", choose_url: false, required: false }
+              - { label: "Disponible", name: "disponible", widget: "boolean", default: true }
