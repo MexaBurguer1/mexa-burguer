@@ -3,8 +3,8 @@
     {
       "id": "clasica",
       "categoria": "hamburguesas",
-      "nombre": "Hamburguesa Clásica",
-      "descripcion": "Carne de res, queso, lechuga, jitomate y cebolla.",
+      "nombre": "Pollo Clásico",
+      "descripcion": ".",
       "precio": 85,
       "imagenBase": "hamburguesa",
       "icono": "🍔",
@@ -13,9 +13,9 @@
     {
       "id": "bbq",
       "categoria": "hamburguesas",
-      "nombre": "Hamburguesa BBQ",
-      "descripcion": "Carne de res, queso, cebolla y salsa BBQ.",
-      "precio": 95,
+      "nombre": "Pollo Queso",
+      "descripcion": ".",
+      "precio": 85,
       "imagenBase": "hamburguesa",
       "icono": "🍔",
       "disponible": true
@@ -23,9 +23,9 @@
     {
       "id": "mexicana",
       "categoria": "hamburguesas",
-      "nombre": "Hamburguesa Mexicana",
-      "descripcion": "Carne de res, queso, jalapeño, cebolla y aguacate.",
-      "precio": 105,
+      "nombre": " Hawaiana de Pollo",
+      "descripcion": ".",
+      "precio": 85,
       "imagenBase": "hamburguesa",
       "icono": "🍔",
       "disponible": true
@@ -33,59 +33,59 @@
     {
       "id": "burger4",
       "categoria": "hamburguesas",
-      "nombre": "Hamburguesa 4",
-      "descripcion": "Producto por definir.",
-      "precio": null,
+      "nombre": "Chorizo (Pollo)",
+      "descripcion": ".",
+      "precio": 85,
       "imagenBase": "hamburguesa",
       "icono": "🍔",
-      "disponible": false
+      "disponible": true
     },
     {
       "id": "hotdog1",
       "categoria": "hotdogs",
-      "nombre": "Hot Dog Clásico",
-      "descripcion": "Salchicha, jitomate, cebolla, catsup, mostaza y mayonesa.",
-      "precio": 60,
-      "imagenBase": "hot dog",
+      "nombre": "Hot Dog Jumbo Clásico",
+      "descripcion": ".",
+      "precio": 65,
+      "imagenBase": "/imagenes/hot dog.jpg",
       "icono": "🌭",
       "disponible": true
     },
     {
       "id": "hotdog2",
       "categoria": "hotdogs",
-      "nombre": "Hot Dog Mexa",
-      "descripcion": "Salchicha, queso, jalapeño, cebolla y aderezo.",
-      "precio": 75,
-      "imagenBase": "hot dog",
+      "nombre": "Hot Dog Jumbo Extra Queso",
+      "descripcion": ".",
+      "precio": 70,
+      "imagenBase": "/imagenes/hot dog.jpg",
       "icono": "🌭",
       "disponible": true
     },
     {
       "id": "hotdog3",
       "categoria": "hotdogs",
-      "nombre": "Hot Dog 3",
-      "descripcion": "Producto por definir.",
-      "precio": null,
-      "imagenBase": "hot dog",
+      "nombre": "Hot Dog Jumbo Hawaiana",
+      "descripcion": ".",
+      "precio": 70,
+      "imagenBase": "/imagenes/hot dog.jpg",
       "icono": "🌭",
-      "disponible": false
+      "disponible": true
     },
     {
       "id": "hotdog4",
       "categoria": "hotdogs",
-      "nombre": "Hot Dog 4",
-      "descripcion": "Producto por definir.",
-      "precio": null,
-      "imagenBase": "hot dog",
+      "nombre": "Hot Dog Jumbo Peperoni",
+      "descripcion": ".",
+      "precio": 75,
+      "imagenBase": "/imagenes/hot dog.jpg",
       "icono": "🌭",
-      "disponible": false
+      "disponible": true
     },
     {
       "id": "papas1",
       "categoria": "papas",
-      "nombre": "Papas 1",
-      "descripcion": "Sabor por definir.",
-      "precio": null,
+      "nombre": " Orden de Papas",
+      "descripcion": "Opciones: Pepper Lemon, Parmesano, papas naturales",
+      "precio": 60,
       "imagenBase": "papas gajo",
       "icono": "🍟",
       "disponible": true
@@ -93,9 +93,9 @@
     {
       "id": "papas2",
       "categoria": "papas",
-      "nombre": "Papas 2",
-      "descripcion": "Sabor por definir.",
-      "precio": null,
+      "nombre": "Papas Individuales",
+      "descripcion": "Opciones: Pepper Lemon, Parmesano, papas naturales.",
+      "precio": 27,
       "imagenBase": "papas gajo",
       "icono": "🍟",
       "disponible": true
@@ -103,10 +103,10 @@
     {
       "id": "papas3",
       "categoria": "papas",
-      "nombre": "Papas 3",
-      "descripcion": "Sabor por definir.",
-      "precio": null,
-      "imagenBase": "papas gajo",
+      "nombre": "Papas con Tocino y Queso Caliente",
+      "descripcion": ".",
+      "precio": 80,
+      "imagenBase": "/imagenes/papas gajo.jpg",
       "icono": "🍟",
       "disponible": true
     },
@@ -118,25 +118,25 @@
       "precio": null,
       "imagenBase": "papas gajo",
       "icono": "🍟",
-      "disponible": true
+      "disponible": false
     },
     {
       "id": "boneless1",
       "categoria": "boneless",
-      "nombre": "Boneless 1",
-      "descripcion": "Sabor por definir.",
+      "nombre": "Orden de Boneless 250 g",
+      "descripcion": "Sabores disponibles: BBQ, Mango Habanero, Búfalo y Maracuyá.",
       "precio": null,
-      "imagenBase": "bonelessmexa",
+      "imagenBase": "/imagenes/bonelessmexa.jpeg",
       "icono": "🍗",
       "disponible": true
     },
     {
       "id": "boneless2",
       "categoria": "boneless",
-      "nombre": "Boneless 2",
-      "descripcion": "Sabor por definir.",
-      "precio": null,
-      "imagenBase": "bonelessmexa",
+      "nombre": "Orden de Boneless 500 g",
+      "descripcion": " Sabores disponibles: BBQ, Mango Habanero, Búfalo y Maracuyá.",
+      "precio": 140,
+      "imagenBase": "/imagenes/bonelessmexa.jpeg",
       "icono": "🍗",
       "disponible": true
     },
@@ -148,7 +148,7 @@
       "precio": null,
       "imagenBase": "bonelessmexa",
       "icono": "🍗",
-      "disponible": true
+      "disponible": false
     },
     {
       "id": "boneless4",
@@ -158,37 +158,37 @@
       "precio": null,
       "imagenBase": "bonelessmexa",
       "icono": "🍗",
-      "disponible": true
+      "disponible": false
     },
     {
       "id": "refresco",
       "categoria": "bebidas",
-      "nombre": "Refresco",
+      "nombre": "Coca-Cola",
       "descripcion": "Refresco frío.",
-      "precio": 30,
-      "imagenBase": "agua maravuya",
+      "precio": 27,
+      "imagenBase": "/imagenes/coca.jpg",
       "icono": "🥤",
       "disponible": true
     },
     {
       "id": "agua",
       "categoria": "bebidas",
-      "nombre": "Agua fresca",
+      "nombre": "Refresco Variado",
       "descripcion": "Bebida fría.",
-      "precio": 20,
-      "imagenBase": "agua maravuya",
+      "precio": 25,
+      "imagenBase": "/imagenes/refrescos.jpg",
       "icono": "🥤",
       "disponible": true
     },
     {
       "id": "bebida3",
       "categoria": "bebidas",
-      "nombre": "Bebida 3",
-      "descripcion": "Producto por definir.",
-      "precio": null,
-      "imagenBase": "agua maravuya",
+      "nombre": "Agua de Sabor",
+      "descripcion": "Presentación de 1/2 litro.",
+      "precio": 30,
+      "imagenBase": "/imagenes/agua maravuya.jpg",
       "icono": "🥤",
-      "disponible": false
+      "disponible": true
     },
     {
       "id": "bebida4",
@@ -199,6 +199,70 @@
       "imagenBase": "agua maravuya",
       "icono": "🥤",
       "disponible": false
+    },
+    {
+      "disponible": true,
+      "categoria": "hamburguesas",
+      "nombre": "Tender de Pollo",
+      "precio": 95,
+      "imagenBase": "/imagenes/hamburguesa.jpg",
+      "descripcion": "."
+    },
+    {
+      "disponible": true,
+      "categoria": "hamburguesas",
+      "nombre": "Res Clásica",
+      "precio": 100,
+      "imagenBase": "/imagenes/hamburguesa.jpg",
+      "descripcion": "."
+    },
+    {
+      "disponible": true,
+      "categoria": "hamburguesas",
+      "nombre": " Res Queso",
+      "precio": 100,
+      "imagenBase": "/imagenes/hamburguesa.jpg",
+      "descripcion": "."
+    },
+    {
+      "disponible": true,
+      "categoria": "hamburguesas",
+      "nombre": "Hawaiana de Res",
+      "precio": 100,
+      "imagenBase": "/imagenes/hamburguesa.jpg",
+      "descripcion": "."
+    },
+    {
+      "disponible": true,
+      "categoria": "hamburguesas",
+      "nombre": "Chorizo (Res)",
+      "precio": 110,
+      "imagenBase": "/imagenes/hamburguesa.jpg",
+      "descripcion": "."
+    },
+    {
+      "disponible": true,
+      "categoria": "hamburguesas",
+      "nombre": "BBQ Bacon (Res)",
+      "precio": 120,
+      "imagenBase": "/imagenes/hamburguesa.jpg",
+      "descripcion": "."
+    },
+    {
+      "disponible": true,
+      "categoria": "hotdogs",
+      "nombre": " Hot Dog Jumbo Chorizo",
+      "precio": 75,
+      "imagenBase": "/imagenes/hot dog.jpg",
+      "descripcion": "."
+    },
+    {
+      "disponible": true,
+      "categoria": "hotdogs",
+      "nombre": "Hot Dog Jumbo BBQ Bacon",
+      "precio": 80,
+      "imagenBase": "/imagenes/hot dog.jpg",
+      "descripcion": "."
     }
   ],
   "promo": {
