@@ -125,7 +125,7 @@
       "categoria": "boneless",
       "nombre": "Orden de Boneless 250 g",
       "descripcion": "Sabores disponibles: BBQ, Mango Habanero, Búfalo y Maracuyá.",
-      "precio": null,
+      "precio": 75,
       "imagenBase": "/imagenes/bonelessmexa.jpeg",
       "icono": "🍗",
       "disponible": true
@@ -268,7 +268,7 @@
   "promo": {
     "id": "promo-mexa",
     "nombre": "Promo Mexa",
-    "descripcion": "Promoción especial Mexa disponible todos los días.",
+    "descripcion": "Mantente al pendiente de nuestras promociones ",
     "precio": null,
     "imagenBase": "promomexa",
     "disponible": true,
