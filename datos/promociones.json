@@ -15,14 +15,14 @@
   },
   "martes": {
     "nombre": "Promo del martes",
-    "descripcion": "Promoción especial Mexa del martes.",
+    "descripcion": "Mantente al pendiente de nuestras promociones",
     "precio": null,
     "imagenBase": "/imagenes/promomexa.jpg",
     "disponible": false
   },
   "miercoles": {
     "nombre": "Promo del miércoles",
-    "descripcion": "Promoción especial Mexa del miércoles.",
+    "descripcion": "Mantente al pendiente de nuestras promociones",
     "precio": null,
     "imagenBase": "/imagenes/promomexa.jpg",
     "disponible": false
