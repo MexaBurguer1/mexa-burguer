@@ -273,5 +273,10 @@
     "imagenBase": "promomexa",
     "disponible": true,
     "esPromo": true
+  },
+  "pago": {
+    "banco": " Mercado Pago",
+    "clabe": "722969012717749595",
+    "titular": "Carmen Lorena Hernández Pedraza"
   }
 }
