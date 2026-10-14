@@ -1,0 +1,75 @@
+MEXA BURGUER - ACTUALIZACIÓN DE LA CUENTA ORIGINAL
+Preparado el 14 de octubre de 2026 a partir del ZIP final de Roy.
+
+Proyecto de Netlify: tourmaline-panda-918e15
+Repositorio de GitHub: MexaBurguer1/mexa-burguer
+Rama: main
+Acceso del administrador: https://tourmaline-panda-918e15.netlify.app/admin/
+
+QUÉ SE PREPARÓ
+- Se conservan los productos, precios, datos y todas las imágenes provisionales del ZIP.
+- El administrador conserva el acceso de la cuenta original mediante Netlify Identity y Git Gateway.
+- Apartados: Menú y pagos, Fondos e imágenes y Promociones por día.
+- La página lee los archivos de apariencia y promociones que ya existen en datos/.
+- Si la promoción de un día se desactiva, se usa la promoción fija de datos/menu.json.
+- El día se calcula con el horario de Puebla (America/Mexico_City).
+- Los enlaces de invitación y recuperación de contraseña que lleguen al inicio se dirigen a /admin/.
+
+1. ANTES DE SUBIR
+Deja el proyecto original en Stopped builds.
+Si la cuenta alternativa también está conectada a este mismo repositorio y a main,
+detén sus builds antes de guardar cambios en GitHub. Así no publicará por cada guardado.
+
+2. ABRIR EL PAQUETE
+Descomprime este ZIP. Abre la carpeta poyecto-hamburguesas.
+No subas el ZIP directamente a GitHub ni crees una carpeta adicional dentro del repositorio.
+
+3. GUARDAR LOS CAMBIOS JUNTOS EN GITHUB
+Abre https://github.com/MexaBurguer1/mexa-burguer
+Comprueba que la rama seleccionada sea main.
+
+Los archivos que cambian con respecto a la versión de GitHub revisada son:
+  index.html
+  admin/config.yml
+  admin/index.html
+  css/style.css (se incluye la versión final que Roy proporcionó)
+
+Para conservar las rutas de las carpetas:
+- En la raíz del repositorio, pulsa Add file > Upload files.
+- Arrastra index.html y las carpetas admin y css de este paquete.
+- Escribe: Actualizar página y administrador de la cuenta original.
+- Guarda todos juntos con Commit changes en main.
+
+Los archivos de datos/, js/ e imagenes/ ya coinciden con la versión de GitHub revisada.
+No necesitas volver a subirlos si siguen iguales. Si cambiaste el menú después de
+preparar este paquete, conserva los cambios más recientes en esos archivos.
+El archivo dartos cliente.png del ZIP original no se utiliza en la página y no forma
+parte de los archivos que debes cargar.
+
+4. CONSERVAR EL ACCESO DE DAVID
+No cambies ni desactives los usuarios existentes de Identity, ni Git Gateway.
+Este administrador usa el correo y contraseña de la cuenta original, no el botón
+de acceso directo a GitHub de la versión alternativa.
+Los archivos solo preparan esta conexión: el acceso real se comprueba después de publicar.
+
+5. PUBLICAR UNA SOLA VEZ
+Cuando todos los cambios estén guardados y revisados, verifica el saldo de créditos.
+En los planes por créditos, una publicación de producción cuesta actualmente 15 créditos;
+también hay consumo por visitas. Reserva margen para el tráfico de la página.
+Activa los builds solo del proyecto original y usa Deploys > Trigger deploy para
+publicar la versión más reciente de main. Activar builds por sí solo no publica.
+Mantén pausada la alternativa si no quieres que también publique desde este repositorio.
+
+6. COMPROBAR
+- Espera a que la publicación aparezca como Published.
+- Abre la página pública y revisa productos y un total de carrito.
+- Abre /admin/ e inicia sesión con la cuenta original.
+- Deben aparecer Menú y pagos, Fondos e imágenes y Promociones por día.
+- Puedes comprobar esos formularios sin guardar para no generar otra publicación.
+- Cada guardado del administrador que publique en main puede generar otra publicación
+  mientras los builds estén activos. Agrupa las modificaciones que sea posible agrupar.
+
+Referencias:
+https://docs.netlify.com/build/configure-builds/stop-or-activate-builds/
+https://docs.netlify.com/manage/accounts-and-billing/billing/billing-for-credit-based-plans/how-credits-work/
+https://decapcms.org/docs/git-gateway-backend/
