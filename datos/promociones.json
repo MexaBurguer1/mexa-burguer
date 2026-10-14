@@ -8,24 +8,24 @@
   },
   "lunes": {
     "nombre": "Promo del lunes",
-    "descripcion": "Promoción especial Mexa del lunes.",
+    "descripcion": "Mantente al pendiente de nuestras promociones",
     "precio": null,
     "imagenBase": "/imagenes/promomexa.jpg",
-    "disponible": true
+    "disponible": false
   },
   "martes": {
     "nombre": "Promo del martes",
     "descripcion": "Promoción especial Mexa del martes.",
     "precio": null,
     "imagenBase": "/imagenes/promomexa.jpg",
-    "disponible": true
+    "disponible": false
   },
   "miercoles": {
     "nombre": "Promo del miércoles",
     "descripcion": "Promoción especial Mexa del miércoles.",
     "precio": null,
     "imagenBase": "/imagenes/promomexa.jpg",
-    "disponible": true
+    "disponible": false
   },
   "jueves": {
     "nombre": "Promo del jueves",
