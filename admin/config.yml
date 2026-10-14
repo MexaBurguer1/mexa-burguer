@@ -1,6 +1,5 @@
 backend:
-  name: github
-  repo: MexaBurguer1/mexa-burguer
+  name: git-gateway
   branch: main
 
 locale: "es"
@@ -63,6 +62,20 @@ collections:
                 name: "disponible"
                 widget: "boolean"
                 default: true
+
+          - label: "Promoción fija / de respaldo"
+            name: "promo"
+            widget: "object"
+            required: false
+            hint: "Se muestra cuando no hay una promoción disponible para el día actual."
+            fields:
+              - { label: "ID interno", name: "id", widget: "hidden", default: "promo-mexa", required: false }
+              - { label: "Nombre", name: "nombre", widget: "string" }
+              - { label: "Descripción", name: "descripcion", widget: "text" }
+              - { label: "Precio", name: "precio", widget: "number", value_type: "float", required: false }
+              - { label: "Imagen", name: "imagenBase", widget: "image", choose_url: false, required: false }
+              - { label: "Disponible", name: "disponible", widget: "boolean", default: true }
+              - { label: "Promoción", name: "esPromo", widget: "hidden", default: true, required: false }
 
           - label: "Datos de pago"
             name: "pago"
