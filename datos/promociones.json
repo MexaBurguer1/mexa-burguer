@@ -1,8 +1,8 @@
 {
   "domingo": {
     "nombre": "Promo del domingo",
-    "descripcion": "Promoción especial Mexa del domingo.",
-    "precio": null,
+    "descripcion": "Agrega una orden de papas individuales y un agua de sabor de 1/2 litro a cualquiera de tus alimentos por 43 pesos adicionales.",
+    "precio": 43,
     "imagenBase": "/imagenes/promomexa.jpg",
     "disponible": true
   },
@@ -29,22 +29,22 @@
   },
   "jueves": {
     "nombre": "Promo del jueves",
-    "descripcion": "Promoción especial Mexa del jueves.",
-    "precio": null,
+    "descripcion": "Agrega una orden de papas individuales y un agua de sabor de 1/2 litro a cualquiera de tus alimentos por 43 pesos adicionales.",
+    "precio": 43,
     "imagenBase": "/imagenes/promomexa.jpg",
     "disponible": true
   },
   "viernes": {
     "nombre": "Promo del viernes",
-    "descripcion": "Promoción especial Mexa del viernes.",
-    "precio": null,
+    "descripcion": "Agrega una orden de papas individuales y un agua de sabor de 1/2 litro a cualquiera de tus alimentos por 43 pesos adicionales.",
+    "precio": 43,
     "imagenBase": "/imagenes/promomexa.jpg",
     "disponible": true
   },
   "sabado": {
     "nombre": "Promo del sábado",
-    "descripcion": "Promoción especial Mexa del sábado.",
-    "precio": null,
+    "descripcion": "Agrega una orden de papas individuales y un agua de sabor de 1/2 litro a cualquiera de tus alimentos por 43 pesos adicionales.",
+    "precio": 43,
     "imagenBase": "/imagenes/promomexa.jpg",
     "disponible": true
   }
